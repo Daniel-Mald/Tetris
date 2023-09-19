@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Body.png" />
+    <None Remove="Assets\DeadBody.png" />
+    <None Remove="Assets\DeadHead.png" />
+    <None Remove="Assets\Empty.png" />
+    <None Remove="Assets\Food.png" />
+    <None Remove="Assets\Head.png" />
+    <None Remove="Assets\juan.png" />
+    <None Remove="Assets\KirbyRight.gif" />
+    <None Remove="Assets\Roca.png" />
+    <None Remove="Assets\Tierra.png" />
+    <None Remove="Assets\Vacio.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Body.png" />
+    <Resource Include="Assets\DeadBody.png" />
+    <Resource Include="Assets\DeadHead.png" />
+    <Resource Include="Assets\Empty.png" />
+    <Resource Include="Assets\Food.png" />
+    <Resource Include="Assets\Head.png" />
+    <Resource Include="Assets\juan.png" />
+    <Resource Include="Assets\KirbyRight.gif" />
+    <Resource Include="Assets\Roca.png" />
+    <Resource Include="Assets\Tierra.png" />
+    <Resource Include="Assets\Vacio.png" />
+  </ItemGroup>
+
+</Project>
