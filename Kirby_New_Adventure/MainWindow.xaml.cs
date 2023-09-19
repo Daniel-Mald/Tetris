@@ -57,26 +57,49 @@ namespace Kirby_New_Adventure
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-
+            var tecla = e.Key;
             if (gameState.Vidas == 0 || gameState.Moves == 0)
             {
                 gameState.Move();
             }
-         if(gameRunning == true)
+            if (gameRunning == true)
             {
-                switch (e.Key)
+                if (tecla == Key.Left)
                 {
-                    case Key.Left:
-                        gameState.ChangeDirection(Direction.Left); break;
-                    case Key.Right:
-                        gameState.ChangeDirection(Direction.Right); break;
-                    case Key.Up:
-                        gameState.ChangeDirection(Direction.Up); break;
-                    case Key.Down:
-                        gameState.ChangeDirection(Direction.Down); break;
+                    gameState.ChangeDirection(Direction.Left);
+                }
+                else if (tecla == Key.Right)
+                {
+                    gameState.ChangeDirection(Direction.Right);
+                }
+                else if (tecla == Key.Up)
+                {
+                    gameState.ChangeDirection(Direction.Up);
+                }
+                else if (tecla == Key.Down)
+                {
+                    gameState.ChangeDirection(Direction.Down);
                 }
                 GameLoop();
             }
+            
+
+
+            //if (gameRunning == true)
+            //{
+            //    switch (e.Key)
+            //    {
+            //        case Key.Left:
+            //            gameState.ChangeDirection(Direction.Left); break;
+            //        case Key.Right:
+            //            gameState.ChangeDirection(Direction.Right); break;
+            //        case Key.Up:
+            //            gameState.ChangeDirection(Direction.Up); break;
+            //        case Key.Down:
+            //            gameState.ChangeDirection(Direction.Down); break;
+            //    }
+            //    GameLoop();
+            //}
          //hacer metodo de chequeo a ver si perdio
             
         }
