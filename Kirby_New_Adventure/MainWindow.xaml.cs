@@ -206,7 +206,7 @@ namespace Kirby_New_Adventure
            
             gridImages = SetUpGrid();
             Draw();
-            
+            Screnganar.Visibility = Visibility.Hidden;
             SelectNivel.Visibility = Visibility.Hidden;
             gameRunning = true;
             
