@@ -11,12 +11,12 @@ namespace Kirby_New_Adventure
     public static class Images
     {
         public readonly static ImageSource Empty = LoadImages("Empty.png");
-        public readonly static ImageSource Tierra = LoadImages("Tierra.png");
+        public readonly static ImageSource Tierra = LoadImages("Pasto1.png");
         public readonly static ImageSource Kirby = LoadImages("KirbyRight.gif");
         public readonly static ImageSource Food = LoadImages("Food.png");
-        public readonly static ImageSource Roca = LoadImages("Roca.png");
-        public readonly static ImageSource Vacio = LoadImages("Vacio.png");
-        public readonly static ImageSource Juan = LoadImages("juan.png");
+        public readonly static ImageSource Roca = LoadImages("Roca_2.png");
+        public readonly static ImageSource Vacio = LoadImages("Hoyo1.png");
+        public readonly static ImageSource Estrella = LoadImages("Estrella.png");
 
         private static ImageSource LoadImages(string filename)
         {

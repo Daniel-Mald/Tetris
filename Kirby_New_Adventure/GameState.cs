@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Kirby_New_Adventure
 {
@@ -23,15 +25,30 @@ namespace Kirby_New_Adventure
         public bool GameOver { get; private set; }
         public int state { get; private set; }
         public string Dificultad { get; set; }
-        public bool Ganar { get; set; }
         
+        public bool Ganar { get; set; }
+        List<string> cadena = new List<string>();
+
+        //Delegado y eventos
+        public delegate void Delegado();
+        public event Delegado Al_Ganar;
+        public event Delegado Al_Perder;
+        public event Delegado Al_Caer;
+
 
         private readonly Random random = new Random();
+        public SoundPlayer p = new();
+        string ruta = "";
+      
+
 
         public GameState(int rows, int cols, string dif)
         {
             Mapa Ma = new Mapa(rows, cols, 1);
             Rows = rows; Cols = cols;
+            Al_Caer += GameState_Al_Caer;
+            Al_Ganar += GameState_Al_Ganar;
+            Al_Perder += GameState_Al_Perder;
             Grid = Ma.MapaActual;
             KirbyPosiion = Ma.KirbyPos;
             KIrbyPosInitial = Ma.KirbyPos;
@@ -46,12 +63,12 @@ namespace Kirby_New_Adventure
             else if (dif == "Dificil")
             {
                 Vidas = 1;
-                Moves = 15;
+                Moves = 11;
             }
             else
             {
                 Vidas = 3;
-                Moves = 11;
+                Moves = 15;
             }
                 
             Dir = Direction.Right;
@@ -59,25 +76,37 @@ namespace Kirby_New_Adventure
             
            
         }
-        
 
-      
+        private void GameState_Al_Perder()
+        {
+            GameOver = true;
+        }
+
+        private void GameState_Al_Ganar()
+        {
+            GameOver = true;
+        }
+
+        public void GameState_Al_Caer()
+        {
+            Vidas--;
+            KirbyPosiion = KIrbyPosInitial;
+            Moves--;
+            Perdio();
+        }
+
         public Position HeadPosition()
         {
             return KirbyPosiion;
         }
         
         private void SetKirby(Position pos)
-        {
-
-            
-            KirbyPosiion = pos;
-           
+        {      
+            KirbyPosiion = pos; 
         }
-      
+
         public void ChangeDirection(Direction dir)
-        {
-           
+        {          
             Dir = dir;
         }
         private bool OutsideGrid(Position pos)
@@ -89,47 +118,49 @@ namespace Kirby_New_Adventure
             if (OutsideGrid(newHeadPos))
             {
                 return GridValue.Outside;
-            }
-            
+            }           
             return Grid[newHeadPos.Row, newHeadPos.Col];
         }
+        public bool Perdio()
+        {
+            if (Vidas == 0 || Moves == 0)
+            {
+                Al_Perder?.Invoke();
+                return true;
+            }
+            return false;
+        }
+
         public void Move()
         {
-            
+            //Ver la siguiente posiscion
             Position newHeadPos = HeadPosition().Translate(Dir);
             GridValue hit = WillHit(newHeadPos);
+
             
-            if(Vidas == 0 || Moves == 0)
-            {
-                GameOver = true;
-                return;
-            }
             if(newHeadPos == JuanPosition)
             {
                 Ganar = true;
-                GameOver = true;
-                
+                Al_Ganar?.Invoke();              
                 return;
             }
             if (hit == GridValue.Empty || hit == GridValue.Vacio )
-            {
-                
-                Vidas--;
-                
-                KirbyPosiion = KIrbyPosInitial;
-            }
-            else if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
-            {
-                Moves--;
+            {  
+                Al_Caer?.Invoke();
                 return;
             }
-            else
+            if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
             {
-                SetKirby( newHeadPos);
-               
+                Moves--;
+                Perdio();
+                return;
             }
+            
+            
+                SetKirby( newHeadPos);
+           
             Moves--;
-
+            
         }
     }
 }

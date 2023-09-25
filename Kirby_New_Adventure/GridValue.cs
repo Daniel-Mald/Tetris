@@ -9,7 +9,7 @@
         Food,
         Kirby,
         Tierra,
-        Juan
+        Estrella
 
     }
 }
