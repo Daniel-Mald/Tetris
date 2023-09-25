@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Windows.Media;
 
 namespace Kirby_New_Adventure
 {
-    public class GameState
+    public  class GameState
     {
         public int Rows { get; }
         public int Cols { get; }
@@ -25,7 +26,7 @@ namespace Kirby_New_Adventure
         public bool GameOver { get; private set; }
         public int state { get; private set; }
         public string Dificultad { get; set; }
-        
+        bool ControlPiedra = false;
         public bool Ganar { get; set; }
         List<string> cadena = new List<string>();
 
@@ -87,11 +88,15 @@ namespace Kirby_New_Adventure
             GameOver = true;
         }
 
-        public void GameState_Al_Caer()
+        public async void GameState_Al_Caer()
         {
+            //SetKirby(HeadPosition().Translate(Dir));
+            //await Task.Delay(300);
+            
             Vidas--;
-            KirbyPosiion = KIrbyPosInitial;
-            Moves--;
+           // Moves--;
+            //KirbyPosiion = KIrbyPosInitial;
+            SetKirby(KIrbyPosInitial);
             Perdio();
         }
 
@@ -130,37 +135,64 @@ namespace Kirby_New_Adventure
             }
             return false;
         }
-
-        public void Move()
+        public void ValidarPos(Position _newPos)
         {
-            //Ver la siguiente posiscion
-            Position newHeadPos = HeadPosition().Translate(Dir);
-            GridValue hit = WillHit(newHeadPos);
-
-            
-            if(newHeadPos == JuanPosition)
+            GridValue hit = WillHit(_newPos);
+            if (_newPos == JuanPosition)
             {
                 Ganar = true;
-                Al_Ganar?.Invoke();              
+                Al_Ganar?.Invoke();
                 return;
             }
-            if (hit == GridValue.Empty || hit == GridValue.Vacio )
-            {  
+            if (hit == GridValue.Empty || hit == GridValue.Vacio)
+            {
                 Al_Caer?.Invoke();
                 return;
             }
             if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
             {
-                Moves--;
+                ControlPiedra = true;
                 Perdio();
                 return;
             }
+        }
+        public void Move()
+        {
+            //Ver la siguiente posiscion
+            Position newHeadPos = HeadPosition().Translate(Dir);
+            if (!ControlPiedra)
+            {
+                SetKirby(newHeadPos);
+                
+            }
+               
             
-            
-                SetKirby( newHeadPos);
-           
             Moves--;
-            
+
+            //GridValue hit = WillHit(newHeadPos);
+
+
+            //if(newHeadPos == JuanPosition)
+            //{
+            //    Ganar = true;
+            //    Al_Ganar?.Invoke();              
+            //    return;
+            //}
+            //if (hit == GridValue.Empty || hit == GridValue.Vacio )
+            //{  
+            //    Al_Caer?.Invoke();
+            //    return;
+            //}
+            //if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
+            //{
+            //    Moves--;
+            //    Perdio();
+            //    return;
+            //}
+
+
+
+
         }
     }
 }

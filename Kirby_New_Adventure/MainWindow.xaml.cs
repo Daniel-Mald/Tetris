@@ -93,9 +93,12 @@ namespace Kirby_New_Adventure
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             var tecla = e.Key;
-            
-                
-            
+
+            if (tecla != Key.Down && tecla != Key.Left && tecla != Key.Right && tecla != Key.Up)
+            {
+                return;
+            }
+
             if (gameRunning == true)
             {
                 if (tecla == Key.Left)
@@ -114,14 +117,12 @@ namespace Kirby_New_Adventure
                 {
                     gameState.ChangeDirection(Direction.Down);
                 }
-                else if (tecla != Key.Down&& tecla != Key.Left && tecla != Key.Right && tecla != Key.Up  )
-                {
-                    return;
-                }
+                
                 
             }
             //Revisar si no perdio
             //gameState.Perdio();
+            //game.stateAl_Caer?.Invoke();
             GameLoop();
 
 
@@ -135,7 +136,10 @@ namespace Kirby_New_Adventure
             if (!gameState.GameOver)
             {              
                 gameState.Move();
+                await Task.Delay(300);
                 Draw();
+                gameState.ValidarPos(gameState.KirbyPosiion);
+                
                 if (gameState.Ganar == true)
                 {
                     await Task.Delay(1000);
@@ -150,6 +154,8 @@ namespace Kirby_New_Adventure
             {
                 
                 gameRunning = false;
+                //gameState.Move();
+                //Draw();
                 await Task.Delay(1000);
 
                 
@@ -201,7 +207,7 @@ namespace Kirby_New_Adventure
             
         }
        
-        private void Draw()
+        public void Draw()
         {
             DrawGrid();
             
