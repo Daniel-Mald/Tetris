@@ -50,7 +50,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
         </Viewbox>
         <Border x:Name="Screnganar" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Fondo.jpeg">
+                <ImageBrush ImageSource="Assets/Kiby_win.png">
 
                 </ImageBrush>
             </Border.Background>
@@ -62,7 +62,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
         </Border>
         <Border x:Name="Screnperder" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Fondo.jpeg">
+                <ImageBrush ImageSource="Assets/Kirby_lose.png">
 
                 </ImageBrush>
             </Border.Background>
@@ -75,7 +75,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
 
         <Border x:Name="SelectNivel" >
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Fondo.jpeg">
+                <ImageBrush ImageSource="Assets/Pantalla_principal.jpg">
 
                 </ImageBrush>
             </Border.Background>
@@ -90,7 +90,24 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     
                     <DockPanel.Resources>
                         <Style TargetType="RadioButton">
-                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="FontSize" Value="50"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border Background="CadetBlue">
+                                            <ContentPresenter></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="red">
+                                        
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </DockPanel.Resources>
                     
@@ -112,14 +129,29 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
         <Border x:Name="Overlay" Grid.Row="1"  
 RenderOptions.EdgeMode="Aliased">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Fondo.jpeg">
+                <ImageBrush ImageSource="Assets/Pantalla_principal.jpg">
                     
                 </ImageBrush>
             </Border.Background>
 
             <Grid x:Name="LockScreen" >
-                <TextBlock FontSize="50">Kirby New Adventure </TextBlock>
-                <Button Width="70" Height="50" FontSize="30" x:Name="btnInicio" Click="btnInicio_Click">Start</Button>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--<TextBlock FontSize="50">Kirby New Adventure </TextBlock>-->
+                <Button Grid.Column="2" Grid.Row="2"  Height="70" FontSize="50"  
+                        BorderThickness="0" Margin="5" x:Name="btnInicio" Click="btnInicio_Click">
+                    <Button.Background>
+                        <SolidColorBrush Color="AliceBlue" Opacity="0.5"/>
+                    </Button.Background>
+                    Start</Button>
 
             </Grid>
             

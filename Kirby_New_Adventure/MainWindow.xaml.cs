@@ -104,18 +104,22 @@ namespace Kirby_New_Adventure
                 if (tecla == Key.Left)
                 {
                     gameState.ChangeDirection(Direction.Left);
+                    gameState.CadenaDePasos+="a";
                 }
                 else if (tecla == Key.Right)
                 {
                     gameState.ChangeDirection(Direction.Right);
+                    gameState.CadenaDePasos+= "d";
                 }
                 else if (tecla == Key.Up)
                 {
                     gameState.ChangeDirection(Direction.Up);
+                    gameState.CadenaDePasos+= "w";
                 }
                 else if (tecla == Key.Down)
                 {
                     gameState.ChangeDirection(Direction.Down);
+                    gameState.CadenaDePasos+= "s";
                 }
                 
                 
@@ -134,11 +138,12 @@ namespace Kirby_New_Adventure
         {
             //gameState.Move();
             if (!gameState.GameOver)
-            {              
+            {
+                gameState.ValidarPos();
                 gameState.Move();
-                await Task.Delay(300);
+                //await Task.Delay(300);
                 Draw();
-                gameState.ValidarPos(gameState.KirbyPosiion);
+                //gameState.ValidarPos(gameState.KirbyPosiion);
                 
                 if (gameState.Ganar == true)
                 {

@@ -23,7 +23,10 @@
     <None Remove="Assets\Hoyo2.png" />
     <None Remove="Assets\juan.png" />
     <None Remove="Assets\Jugar_Boton.jpeg" />
+    <None Remove="Assets\Kiby_win.png" />
     <None Remove="Assets\KirbyRight.gif" />
+    <None Remove="Assets\Kirby_lose.png" />
+    <None Remove="Assets\Pantalla_principal.jpg" />
     <None Remove="Assets\Pasto1.png" />
     <None Remove="Assets\Roca.png" />
     <None Remove="Assets\Roca_2.png" />
@@ -54,7 +57,10 @@
     <Resource Include="Assets\Hoyo2.png" />
     <Resource Include="Assets\juan.png" />
     <Resource Include="Assets\Jugar_Boton.jpeg" />
+    <Resource Include="Assets\Kiby_win.png" />
     <Resource Include="Assets\KirbyRight.gif" />
+    <Resource Include="Assets\Kirby_lose.png" />
+    <Resource Include="Assets\Pantalla_principal.jpg" />
     <Resource Include="Assets\Pasto1.png" />
     <Resource Include="Assets\Roca.png" />
     <Resource Include="Assets\Roca_2.png" />

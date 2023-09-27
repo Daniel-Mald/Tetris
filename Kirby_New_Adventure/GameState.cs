@@ -28,8 +28,10 @@ namespace Kirby_New_Adventure
         public string Dificultad { get; set; }
         bool ControlPiedra = false;
         public bool Ganar { get; set; }
-        List<string> cadena = new List<string>();
+        public bool ControlCaida { get; private set; } = false;
 
+       // public List<char> CadenaDePasos = new List<char>();
+        public string CadenaDePasos { get; set; } = "";
         //Delegado y eventos
         public delegate void Delegado();
         public event Delegado Al_Ganar;
@@ -57,8 +59,8 @@ namespace Kirby_New_Adventure
             Ganar = false;
             if (dif == "Facil")
             {
-                Vidas = 10;
-                Moves = 30;
+                Vidas = 6;
+                Moves = 20;
             }
                 
             else if (dif == "Dificil")
@@ -76,6 +78,15 @@ namespace Kirby_New_Adventure
 
             
            
+        }
+        public bool  ValidarCadena()
+        {
+            if (CadenaDePasos.ToString() == "sdddsdsddds")
+            {
+                
+                return true;
+            }
+            return false;
         }
 
         private void GameState_Al_Perder()
@@ -135,24 +146,28 @@ namespace Kirby_New_Adventure
             }
             return false;
         }
-        public void ValidarPos(Position _newPos)
+        public void ValidarPos()
+        
         {
+            Position _newPos = HeadPosition().Translate(Dir);
             GridValue hit = WillHit(_newPos);
+            if (Perdio()) return;
             if (_newPos == JuanPosition)
             {
                 Ganar = true;
                 Al_Ganar?.Invoke();
                 return;
             }
-            if (hit == GridValue.Empty || hit == GridValue.Vacio)
+            if ( hit == GridValue.Vacio)
             {
-                Al_Caer?.Invoke();
+                Vidas--;
+                ControlCaida = true;
                 return;
             }
             if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
             {
                 ControlPiedra = true;
-                Perdio();
+                
                 return;
             }
         }
@@ -160,13 +175,27 @@ namespace Kirby_New_Adventure
         {
             //Ver la siguiente posiscion
             Position newHeadPos = HeadPosition().Translate(Dir);
-            if (!ControlPiedra)
+            if (ControlPiedra == true)
             {
-                SetKirby(newHeadPos);
+                ControlPiedra = false;
+                
                 
             }
-               
-            
+            else if (ControlCaida == true)
+            {
+                ControlCaida = false;
+                SetKirby(newHeadPos);
+                //await Task.Delay(150);
+                Task.Delay(100);
+                SetKirby(KIrbyPosInitial);
+                
+            }
+            else
+            {
+                SetKirby(newHeadPos);
+            }
+            Perdio();
+
             Moves--;
 
             //GridValue hit = WillHit(newHeadPos);
