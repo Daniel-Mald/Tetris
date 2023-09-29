@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+//using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -11,9 +14,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Kirby_New_Adventure;
 
 namespace Kirby_New_Adventure
@@ -43,7 +48,7 @@ namespace Kirby_New_Adventure
         };
         private readonly int rows = 5, cols = 8;
         private Image[,] gridImages;
-        public GameState gameState ;
+        public GameState gameState;
         public string Re { get; set; }
         public string Mens { get; set; }
         //private int state = 0;
@@ -55,13 +60,13 @@ namespace Kirby_New_Adventure
         public event Delegado Al_Perder;
         public event Delegado Al_Caer;
 
-        SoundPlayer Caida = new SoundPlayer("Assets/Fall_sound.wav");
+        //SoundPlayer Caida = new SoundPlayer("Assets/Fall_sound.wav");
         public MainWindow()
         {
             InitializeComponent();
             Al_Ganar += MostrarGanar;
-           Al_Perder += MostrarPerder;
-
+            Al_Perder += MostrarPerder;
+            //playerMovements = Directory.GetFiles("k", "*.png").ToList();
             //Al_Ganar += MainWindow_Al_Ganar;
             //Al_Perder += MainWindow_Al_Perder;
             //Al_Caer += MainWindow_Al_Caer;
@@ -71,13 +76,13 @@ namespace Kirby_New_Adventure
         //{
         //    gameState.Caer();
         //    Caida.Play();
-           
+
         //}
 
         //private void MainWindow_Al_Perder()
         //{
         //    gameState.Morir();
-            
+
         //}
 
         //private void MainWindow_Al_Ganar()
@@ -104,25 +109,25 @@ namespace Kirby_New_Adventure
                 if (tecla == Key.Left)
                 {
                     gameState.ChangeDirection(Direction.Left);
-                    gameState.CadenaDePasos+="a";
+                    gameState.CadenaDePasos += "a";
                 }
                 else if (tecla == Key.Right)
                 {
                     gameState.ChangeDirection(Direction.Right);
-                    gameState.CadenaDePasos+= "d";
+                    gameState.CadenaDePasos += "d";
                 }
                 else if (tecla == Key.Up)
                 {
                     gameState.ChangeDirection(Direction.Up);
-                    gameState.CadenaDePasos+= "w";
+                    gameState.CadenaDePasos += "w";
                 }
                 else if (tecla == Key.Down)
                 {
                     gameState.ChangeDirection(Direction.Down);
-                    gameState.CadenaDePasos+= "s";
+                    gameState.CadenaDePasos += "s";
                 }
-                
-                
+
+
             }
             //Revisar si no perdio
             //gameState.Perdio();
@@ -144,33 +149,38 @@ namespace Kirby_New_Adventure
                 //await Task.Delay(300);
                 Draw();
                 //gameState.ValidarPos(gameState.KirbyPosiion);
-                
+
                 if (gameState.Ganar == true)
                 {
                     await Task.Delay(1000);
-                    
+
                     Al_Ganar?.Invoke();
-                    
+
 
                 }
-                
+
             }
             else
             {
-                
+
                 gameRunning = false;
                 //gameState.Move();
                 //Draw();
                 await Task.Delay(1000);
 
-                
-            }         
+
+            }
         }
-       
+
         public void MostrarGanar()
         {
-            
+
             Screnganar.Visibility = Visibility.Visible;
+            mensaje.Visibility = Visibility.Hidden;
+            if (gameState.MinimoMovs)
+            {
+                mensaje.Visibility = Visibility.Visible;
+            }
         }
         public void MostrarPerder()
         {
@@ -184,7 +194,7 @@ namespace Kirby_New_Adventure
             GameGrid.Rows = rows;
             GameGrid.Columns = cols;
             GameGrid.Width = GameGrid.Height * (cols / (double)rows);
-           
+
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < cols; c++)
@@ -193,39 +203,39 @@ namespace Kirby_New_Adventure
                     {
                         //Source = Images.Empty,
                         RenderTransformOrigin = new Point(0.5, 0.5)
-                       
+
                     };
                     images[r, c] = image;
 
-                    
+
                     GameGrid.Children.Add(image);
 
-                   
+
                 }
             }
-            
+
 
 
             //ShowCountDown();
             // RunGame();
             return images;
-            
+
         }
-       
+
         public void Draw()
         {
             DrawGrid();
-            
-            
+
+
 
             ScoreText.Text = $"Vidas {gameState.Vidas}- Movimientos {gameState.Moves}";
         }
 
 
-       
+
         private void DrawGrid()
         {
-            
+
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < cols; c++)
@@ -233,39 +243,42 @@ namespace Kirby_New_Adventure
                     GridValue gridVal = gameState.Grid[r, c];
                     if (gameState.Grid[r, c] != GridValue.Tierra)
                     {
-                        
-                        gridImages[r,c].Stretch = Stretch.Fill;
-                        
+
+                        gridImages[r, c].Stretch = Stretch.Fill;
+
                         gridImages[r, c].Source = gridValToImag[gridVal];
                     }
                     else
                     {
                         gridImages[r, c].Source = null;
                     }
-                     
-                    
-                    
-                    
+
+
+
+
                 }
             }
-            
+
             Position win = gameState.JuanPosition;
             gridImages[win.Row, win.Col].Source = Images.Estrella;
 
-            Position kirb = gameState.KirbyPosiion;
-            gridImages[kirb.Row, kirb.Col].Source = Images.Kirby;
-            
+
+            DrawKirby();
         }
-        
-        
+
+        public void DrawKirby()
+        {
+            Position kirb = gameState.KirbyPosiion;
+            gridImages[kirb.Row, kirb.Col].Source = player;
+        }
 
         private void Jugar_Click(object sender, RoutedEventArgs e)
         {
-            if(btnfacil.IsChecked == true)
+            if (btnfacil.IsChecked == true)
             {
                 dificultad = "Facil";
             }
-            else if (btndificil.IsChecked ==true)
+            else if (btndificil.IsChecked == true)
             {
                 dificultad = "Dificil";
             }
@@ -273,19 +286,20 @@ namespace Kirby_New_Adventure
             {
                 dificultad = "Normal";
             }
-            
+
             gameState = new GameState(rows, cols, dificultad);
             //gameState.Al_Perder += RegresarAInicio;
             //gameState.Al_Ganar += MostrarGanar;
             gameState.Al_Perder += MostrarPerder;
-
+            el_reloj.Tick += El_reloj_Tick;
+            el_reloj.Start();
             gridImages = SetUpGrid();
 
             Draw();
             Screnganar.Visibility = Visibility.Hidden;
             SelectNivel.Visibility = Visibility.Hidden;
             gameRunning = true;
-            
+
         }
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)
@@ -317,12 +331,34 @@ namespace Kirby_New_Adventure
             gameRunning = true;
         }
 
-        private void RegresarAInicio()
-        {          
-            //await Task.Delay(3000);
-            
-            
-            
+       
+
+        public BitmapImage player { get; set; }
+        
+        
+        int steps = 0;
+          
+
+        
+
+        DispatcherTimer el_reloj = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };
+        
+        private BitmapImage animatePlayer(int start, int end)
+        {
+            steps++;
+            //player = Images.kirbos[1];
+            if (steps > end || steps < start)
+            {
+                steps = start;
+            }
+            player = Images.kirbos[steps];
+            return player;
+        }
+
+        private void El_reloj_Tick(object? sender, EventArgs e)
+        {
+            animatePlayer(0, 9);
+            DrawKirby();
         }
     }
 }

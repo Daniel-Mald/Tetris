@@ -81,6 +81,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                 </Grid.RowDefinitions>
                 <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
                 <Button Grid.Column="3" Grid.Row="1">Siguiente nivel</Button>
+                <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje" Grid.Column="2" Grid.Row="3"></Image>
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
         </Border>
@@ -151,9 +152,21 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=RadioButton} ,Path=IsChecked}"
                                                                      Value="True">
-                                                            <Setter Property="Background" Value="Beige"/>
+                                                            <Setter Property="Background" Value="black"/>
+                                                            <Setter Property="TextBlock.Foreground" Value="LightPink"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
+                                                    <!--<Setter Property="Margin" Value="5" />
+                                                    <Setter Property="Padding" Value="10" />
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsChecked" Value="True">
+                                                            <Setter Property="Background" Value="red" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter Property="Background" Value="White" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>-->
                                                 </Style>
                                             </Border.Resources>
                                             <ContentPresenter HorizontalAlignment="Center"></ContentPresenter>

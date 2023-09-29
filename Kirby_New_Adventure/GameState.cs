@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Resources;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -38,10 +39,11 @@ namespace Kirby_New_Adventure
         public event Delegado Al_Perder;
         public event Delegado Al_Caer;
 
-        public string MensajeVictoria { get; set; } = "";
+        public bool MinimoMovs { get; set; } = false;
         private readonly Random random = new Random();
-        public SoundPlayer p = new();
-        string ruta = "";
+        public SoundPlayer CaerSonido = new SoundPlayer("../Assets/Fall_sound.wav");
+        public SoundPlayer MorirSonido = new("file://application/Assets/Death_sound.wav");
+        
       
 
 
@@ -57,6 +59,7 @@ namespace Kirby_New_Adventure
             KIrbyPosInitial = Ma.KirbyPos;
             JuanPosition = Ma.EstrellaPosition;
             Ganar = false;
+            Images.RellenarKirbos();
             if (dif == "Facil")
             {
                 Vidas = 6;
@@ -81,7 +84,7 @@ namespace Kirby_New_Adventure
         }
         public bool  ValidarCadena()
         {
-            if (CadenaDePasos.ToString() == "sdddsdsddds")
+            if (CadenaDePasos == "sdddsdsddds")
             {
                 
                 return true;
@@ -92,14 +95,16 @@ namespace Kirby_New_Adventure
         private void GameState_Al_Perder()
         {
             GameOver = true;
+            //MorirSonido.PlaySync();
         }
 
         private void GameState_Al_Ganar()
         {
+            MinimoMovs = false;
             GameOver = true;
             if (ValidarCadena())
             {
-                
+                MinimoMovs = true;
             }
         }
 
@@ -109,8 +114,11 @@ namespace Kirby_New_Adventure
             //await Task.Delay(300);
             
             Vidas--;
-           // Moves--;
+            // Moves--;
             //KirbyPosiion = KIrbyPosInitial;
+            
+            
+            //CaerSonido.PlaySync();
             SetKirby(KIrbyPosInitial);
             Perdio();
         }
@@ -190,6 +198,7 @@ namespace Kirby_New_Adventure
             {
                 ControlCaida = false;
                 SetKirby(newHeadPos);
+               // Al_Caer?.Invoke();
                 //await Task.Delay(150);
                 Task.Delay(100);
                 SetKirby(KIrbyPosInitial);
