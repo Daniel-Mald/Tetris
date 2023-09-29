@@ -38,7 +38,7 @@ namespace Kirby_New_Adventure
         public event Delegado Al_Perder;
         public event Delegado Al_Caer;
 
-
+        public string MensajeVictoria { get; set; } = "";
         private readonly Random random = new Random();
         public SoundPlayer p = new();
         string ruta = "";
@@ -97,6 +97,10 @@ namespace Kirby_New_Adventure
         private void GameState_Al_Ganar()
         {
             GameOver = true;
+            if (ValidarCadena())
+            {
+                
+            }
         }
 
         public async void GameState_Al_Caer()
@@ -155,6 +159,7 @@ namespace Kirby_New_Adventure
             if (_newPos == JuanPosition)
             {
                 Ganar = true;
+                
                 Al_Ganar?.Invoke();
                 return;
             }

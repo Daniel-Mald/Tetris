@@ -50,32 +50,80 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
         </Viewbox>
         <Border x:Name="Screnganar" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Kiby_win.png">
+                <ImageBrush ImageSource="Assets/Kirby_Ganar.png">
 
                 </ImageBrush>
             </Border.Background>
-            <DockPanel>
-                <Button Grid.Column="1" Grid.Row="2" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
-                <Button Grid.Column="1" Grid.Row="1">Siguiente nivel</Button>
-                <Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>
-            </DockPanel>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
+                <Button Grid.Column="3" Grid.Row="1">Siguiente nivel</Button>
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
+            </Grid>
         </Border>
         <Border x:Name="Screnperder" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Kirby_lose.png">
+                <ImageBrush ImageSource="Assets/Kirby_perder.png">
 
                 </ImageBrush>
             </Border.Background>
-            <DockPanel>
-                <Button Grid.Column="1" Grid.Row="2" Name="Regresar" Click="Regresar_Click">Regresar a inicio</Button>
-                <Button Grid.Column="1" Grid.Row="1" Name="Reintentar"  Click="Reintentar_Click">Reintentar</Button>
-                <Label DockPanel.Dock="Top" FontSize="40" Content="Perdiste"></Label>
-            </DockPanel>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="3" Grid.Row="2" Name="Regresar" Click="Regresar_Click">Regresar a inicio</Button>
+                <Button Grid.Column="3" Grid.Row="1" Name="Reintentar"  Click="Reintentar_Click">Reintentar</Button>
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Perdiste"></Label>-->
+            </Grid>
         </Border>
 
         <Border x:Name="SelectNivel" >
             <Border.Background>
-                <ImageBrush ImageSource="Assets/Pantalla_principal.jpg">
+                <ImageBrush ImageSource="Assets/Kirby_level.png">
 
                 </ImageBrush>
             </Border.Background>
@@ -91,23 +139,29 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <DockPanel.Resources>
                         <Style TargetType="RadioButton">
                             <Setter Property="FontSize" Value="50"/>
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Background" Value="red"/>
+                           
                             <Setter Property="Template">
+                                
                                 <Setter.Value>
                                     <ControlTemplate TargetType="RadioButton">
-                                        <Border Background="CadetBlue">
-                                            <ContentPresenter></ContentPresenter>
+                                        <Border Background="Transparent">
+                                            <Border.Resources>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=RadioButton} ,Path=IsChecked}"
+                                                                     Value="True">
+                                                            <Setter Property="Background" Value="Beige"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Resources>
+                                            <ContentPresenter HorizontalAlignment="Center"></ContentPresenter>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Background" Value="red">
-                                        
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
+                            
                         </Style>
                     </DockPanel.Resources>
                     
