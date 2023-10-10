@@ -43,5 +43,24 @@ namespace Kirby_New_Adventure
 
 
         }
+        private void  cargarmapa2(int nivel, int row , int col)
+        {
+			MapaActual = new GridValue[row, col];
+			for (int c = 0; c < col; c++)
+			{
+				for (int r = 0; r < row; r++)
+				{
+					if (true)//para hoyos
+						MapaActual[r, c] = GridValue.Vacio;
+					else if (true) //para piedras
+						MapaActual[r, c] = GridValue.Roca;
+					else
+						MapaActual[r, c] = GridValue.Tierra;
+				}
+			}
+
+			KirbyPos = new Position(0, 0);
+			EstrellaPosition = new Position(4, 7);
+		}
     }
 }
