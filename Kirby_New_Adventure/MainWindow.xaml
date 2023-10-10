@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Kirby_New_Adventure"
         mc:Ignorable="d"
         
-                Title="Kirby el asesino de dioses" Height="500" Width="800"
+                Title="Kirby New Adventure" Height="500" Width="800"
        MinWidth="300" MinHeight="300"
 Background="{StaticResource BackgroundColor}"
 Foreground="{StaticResource TextColor}"
