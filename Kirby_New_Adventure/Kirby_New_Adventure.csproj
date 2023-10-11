@@ -22,6 +22,7 @@
     <None Remove="Assets\Head.png" />
     <None Remove="Assets\Hoyo1.png" />
     <None Remove="Assets\Hoyo2.png" />
+    <None Remove="Assets\Hoyo22.png" />
     <None Remove="Assets\juan.png" />
     <None Remove="Assets\Jugar_Boton.jpeg" />
     <None Remove="Assets\Kirbis\k1.png" />
@@ -41,18 +42,26 @@
     <None Remove="Assets\Mensaje.png" />
     <None Remove="Assets\Pantalla_principal.jpg" />
     <None Remove="Assets\Pasto1.png" />
+    <None Remove="Assets\Pasto2.png" />
     <None Remove="Assets\Roca.png" />
+    <None Remove="Assets\Roca2.png" />
+    <None Remove="Assets\Roca22.png" />
     <None Remove="Assets\Roca_2.png" />
     <None Remove="Assets\Tierra.png" />
     <None Remove="Assets\Vacio.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Hoyo22.png" />
     <Resource Include="Assets\Kirbis\k4.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Juego\Juego.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,7 +100,10 @@
     <Resource Include="Assets\Mensaje.png" />
     <Resource Include="Assets\Pantalla_principal.jpg" />
     <Resource Include="Assets\Pasto1.png" />
+    <Resource Include="Assets\Pasto2.png" />
     <Resource Include="Assets\Roca.png" />
+    <Resource Include="Assets\Roca2.png" />
+    <Resource Include="Assets\Roca22.png" />
     <Resource Include="Assets\Roca_2.png" />
     <Resource Include="Assets\Tierra.png" />
     <Resource Include="Assets\Vacio.png" />

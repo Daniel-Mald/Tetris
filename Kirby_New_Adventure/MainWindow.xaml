@@ -33,7 +33,7 @@ WindowStartupLocation="CenterScreen"
 HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.EdgeMode="Aliased" Margin="20 0 20 20">
                     <Grid >
                         <Grid.Background>
-                            <ImageBrush ImageSource="/Assets/Pasto1.png"/>
+                            <ImageBrush ImageSource="/Assets/Pasto2.png"/>
                         </Grid.Background>
                         <UniformGrid x:Name="GameGrid"  Width="400" Height="400" 
 SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">

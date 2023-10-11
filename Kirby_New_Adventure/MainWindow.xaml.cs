@@ -244,9 +244,21 @@ namespace Kirby_New_Adventure
                     if (gameState.Grid[r, c] != GridValue.Tierra)
                     {
 
-                        gridImages[r, c].Stretch = Stretch.Fill;
 
+                        // 
+                        //if (gameState.Grid[r,c] == GridValue.Roca)
+                        //{
+                        //    gridImages[r, c].Height = 100;
+                        //    gridImages[r, c].Width = 100;
+                        //    gridImages[r, c].Source = gridValToImag[gridVal];
+                        //}
+                        //else
+                        //{
+                        //    gridImages[r, c].Source = gridValToImag[gridVal];
+                        //}
                         gridImages[r, c].Source = gridValToImag[gridVal];
+                        gridImages[r, c].Stretch = Stretch.Fill;
+                        
                     }
                     else
                     {
