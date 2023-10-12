@@ -50,9 +50,12 @@ namespace Kirby_New_Adventure
 			{
 				for (int r = 0; r < row; r++)
 				{
-					if (true)//para hoyos
+					if (r == 0 && c == 1 || r == 0 && c == 2 || r == 0 && c == 3 || r == 1 && c == 1 
+                        || r == 1 && c == 6 || r == 2 && c == 5 || r == 3 && c == 3 ||
+                        r == 4 && c == 5)//para hoyos
 						MapaActual[r, c] = GridValue.Vacio;
-					else if (true) //para piedras
+					else if (r == 0 && c == 7 || r == 1 && c == 5 || r == 1 && c == 7 || r == 2 && c == 7 ||
+                        r == 4 && c == 1 || r == 3 && c == 2 || r == 4 && c == 6) //para piedras
 						MapaActual[r, c] = GridValue.Roca;
 					else
 						MapaActual[r, c] = GridValue.Tierra;
