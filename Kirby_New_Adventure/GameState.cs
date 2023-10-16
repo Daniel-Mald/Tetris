@@ -43,39 +43,72 @@ namespace Kirby_New_Adventure
         private readonly Random random = new Random();
         public SoundPlayer CaerSonido = new SoundPlayer("../Assets/Fall_sound.wav");
         public SoundPlayer MorirSonido = new("file://application/Assets/Death_sound.wav");
-        
+
+        public List<Comidaa> Pos_Comida;
       
 
 
-        public GameState(int rows, int cols, string dif)
+        public GameState(int rows, int cols, string dificultad, int nivel)
         {
-            Mapa Ma = new Mapa(rows, cols, 1);
+            Mapa Ma = new Mapa(rows, cols, nivel);
             Rows = rows; Cols = cols;
             Al_Caer += GameState_Al_Caer;
             Al_Ganar += GameState_Al_Ganar;
             Al_Perder += GameState_Al_Perder;
+            Pos_Comida = new();
             Grid = Ma.MapaActual;
             KirbyPosiion = Ma.KirbyPos;
             KIrbyPosInitial = Ma.KirbyPos;
             JuanPosition = Ma.EstrellaPosition;
             Ganar = false;
             Images.RellenarKirbos();
-            if (dif == "Facil")
+            if(nivel == 1)
             {
-                Vidas = 6;
-                Moves = 20;
+                if (dificultad == "Facil")
+                {
+                    Vidas = 6;
+                    Moves = 20;
+                }
+
+                else if (dificultad == "Dificil")
+                {
+                    Vidas = 1;
+                    Moves = 11;
+                }
+                else
+                {
+                    Vidas = 3;
+                    Moves = 15;
+                }
             }
-                
-            else if (dif == "Dificil")
+            else if(nivel == 2)
             {
-                Vidas = 1;
-                Moves = 11;
+                if (dificultad == "Facil")
+                {
+                    Vidas = 6;
+                    Moves = 35;
+                }
+
+                else if (dificultad == "Dificil")
+                {
+                    Vidas = 1;
+                    Moves = 27;
+                }
+                else
+                {
+                    Vidas = 3;
+                    Moves = 31;
+                }
             }
-            else
+            foreach (var item in Ma.Comida)
             {
-                Vidas = 3;
-                Moves = 15;
+                Pos_Comida.Add(new Comidaa
+                {
+                    Posision = item,
+                    Consumida = false
+                });
             }
+            
                 
             Dir = Direction.Right;
 
@@ -159,19 +192,19 @@ namespace Kirby_New_Adventure
             return false;
         }
         public void ValidarPos()
-        
+
         {
             Position _newPos = HeadPosition().Translate(Dir);
             GridValue hit = WillHit(_newPos);
-            if (Perdio()) return;
+            Perdio();
             if (_newPos == JuanPosition)
             {
                 Ganar = true;
-                
+
                 Al_Ganar?.Invoke();
                 return;
             }
-            if ( hit == GridValue.Vacio)
+            if (hit == GridValue.Vacio)
             {
                 Vidas--;
                 ControlCaida = true;
@@ -180,9 +213,10 @@ namespace Kirby_New_Adventure
             if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
             {
                 ControlPiedra = true;
-                
+
                 return;
             }
+
         }
         public void Move()
         {
@@ -236,6 +270,12 @@ namespace Kirby_New_Adventure
 
 
 
+        }
+        public class Comidaa
+        {
+            public Position Posision { get; set; } = null!;
+            public bool Consumida { get; set; }
+            
         }
     }
 }

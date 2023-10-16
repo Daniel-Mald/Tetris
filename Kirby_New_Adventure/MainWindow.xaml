@@ -8,14 +8,16 @@
         
                 Title="Kirby New Adventure" Height="500" Width="800"
        MinWidth="300" MinHeight="300"
-Background="{StaticResource BackgroundColor}"
+
 Foreground="{StaticResource TextColor}"
 FontFamily="{StaticResource MainFont}"
 WindowStartupLocation="CenterScreen"
-       
+       KeyUp="Window_KeyUp"
          KeyDown="Window_KeyDown">
     <!--PreviewKeyDown="Window_PreviewKeyDown"-->
-    
+    <Window.Background>
+        <ImageBrush ImageSource="/Assets/Fondo.png"></ImageBrush>
+    </Window.Background>
 
     <Grid>
         <Viewbox>
@@ -80,7 +82,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
-                <Button Grid.Column="3" Grid.Row="1">Siguiente nivel</Button>
+                <Button Grid.Column="3" Grid.Row="1" Click="Jugar_Click">Siguiente nivel</Button>
                 <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje" Grid.Column="2" Grid.Row="3"></Image>
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
