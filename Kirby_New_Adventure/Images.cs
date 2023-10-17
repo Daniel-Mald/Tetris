@@ -23,12 +23,22 @@ namespace Kirby_New_Adventure
             return new BitmapImage(new Uri($"Assets/{filename}", UriKind.Relative));
         }
         public static List<BitmapImage> kirbos = new  List<BitmapImage>();
+        public static List<BitmapImage> kirbos_e = new List<BitmapImage>();
+        public static List<BitmapImage> kirbos_f = new List<BitmapImage>();
+        public static List<BitmapImage> kirbos_i = new List<BitmapImage>();
         public  static void RellenarKirbos()
         {
             for (int i = 1; i < 11; i++)
             {
                 kirbos.Add( (BitmapImage)LoadImages($"Kirbis/k{i}.png"));
+                kirbos_i.Add((BitmapImage)LoadImages($"Kirbis_izquierda/ki{i}.png"));
+                kirbos_f.Add((BitmapImage)LoadImages($"Kirbis_frente/kf{i}.png"));
             }
+            for (int i = 1; i < 5; i++)
+            {
+                kirbos_e.Add((BitmapImage)LoadImages($"Kirbis_espalda/ke{i}.png"));
+            }
+           
         }
     }
 }

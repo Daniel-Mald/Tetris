@@ -184,8 +184,17 @@ namespace Kirby_New_Adventure
 
         public void MostrarGanar()
         {
-
-            Screnganar.Visibility = Visibility.Visible;
+            Nivel.AumentarPuntaje();
+            PuntajeFinal.Text = $"Puntaje final: {Nivel.PuntajeTotal}";
+            if(Nivel.Nivel == 2)
+            {
+                ScrenSuperganar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Screnganar.Visibility = Visibility.Visible;
+            }
+            
             mensaje.Visibility = Visibility.Hidden;
             if (gameState.MinimoMovs)
             {
@@ -333,6 +342,8 @@ namespace Kirby_New_Adventure
         {
             Screnganar.Visibility = Visibility.Hidden;
             Screnperder.Visibility = Visibility.Hidden;
+            ScrenSuperganar.Visibility = Visibility.Hidden;
+
             SelectNivel.Visibility = Visibility.Visible;
             Overlay.Visibility = Visibility.Visible;
             Nivel = new ControlNiveles();
@@ -354,34 +365,60 @@ namespace Kirby_New_Adventure
         }
 
        
-
-        public BitmapImage player { get; set; }
-        
-        
+        //Animacion
+        public BitmapImage player { get; set; }      
         int steps = 0;
           
-
-        
-
-        DispatcherTimer el_reloj = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };
-        
-        private BitmapImage animatePlayer(int start, int end)
+        DispatcherTimer el_reloj = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };     
+        private BitmapImage animatePlayer(int start, int end, Direction dir)
         {
             steps++;
-            //player = Images.kirbos[1];
             if (steps > end || steps < start)
             {
                 steps = start;
             }
-            player = Images.kirbos[steps];
+            if(dir == Direction.Up)
+            {
+                player = Images.kirbos_e[steps];
+            }
+            else if (dir == Direction.Down)
+            {
+                player = Images.kirbos_f[steps];
+            }
+            else if (dir == Direction.Left)
+            {
+                player = Images.kirbos_i[steps];
+            }
+            else
+            {
+                player = Images.kirbos[steps];
+            }
+            
             return player;
         }
-
-        
-
         private void El_reloj_Tick(object? sender, EventArgs e)
         {
-            animatePlayer(0, 9);
+            if(gameState.Dir == Direction.Up)
+            {
+                animatePlayer(0, 3, gameState.Dir);
+                el_reloj.Interval = TimeSpan.FromMilliseconds(200);
+            }
+            else if (gameState.Dir == Direction.Down)
+            {
+                animatePlayer(0, 9, gameState.Dir);
+                el_reloj.Interval = TimeSpan.FromMilliseconds(100);
+            }
+            else if (gameState.Dir == Direction.Left)
+            {
+                animatePlayer(0, 9, gameState.Dir);
+                el_reloj.Interval = TimeSpan.FromMilliseconds(100);
+            }
+            else
+            {
+                animatePlayer(0, 9, gameState.Dir);
+                el_reloj.Interval = TimeSpan.FromMilliseconds(100);
+            }
+            
             DrawKirby();
         }
     }

@@ -28,8 +28,13 @@ WindowStartupLocation="CenterScreen"
                     <RowDefinition Height="*"/>
 
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="ScoreText" HorizontalAlignment="Center" VerticalAlignment="Center" Text="SCORE 0"
-   FontSize="22" Margin="10"></TextBlock>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Image Source="/Assets/Comida/Corazon.png"></Image>
+                    <TextBlock x:Name="ScoreText" VerticalAlignment="Center" 
+           FontWeight="ExtraBold"  Foreground="#4B4341" Text="SCORE 0"
+         FontSize="22" Margin="10"></TextBlock>
+                </WrapPanel>
+               
 
                 <Border x:Name="GridBorder" Grid.Row="1" BorderBrush="{StaticResource GridLineColor}" BorderThickness="1.5"
 HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.EdgeMode="Aliased" Margin="20 0 20 20">
@@ -227,7 +232,47 @@ RenderOptions.EdgeMode="Aliased">
 
 
         </Border>
-        
+        <Border x:Name="ScrenSuperganar" Grid.Row="1"  Visibility="Hidden">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets/kirbyganador.png">
+
+                </ImageBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="1" Grid.Row="4" x:Name="Regresar1" Click="Regresar_Click">Regresar a inicio</Button>
+                <!--<Button Grid.Column="3" Grid.Row="1" Click="Jugar_Click">Siguiente nivel</Button>-->
+                <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" x:Name="PuntajeFinal">Puntajeadddd finall </TextBlock>
+                <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje2" Grid.Column="2" Grid.Row="3"></Image>
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
+            </Grid>
+        </Border>
 
     </Grid>
     
