@@ -23,6 +23,7 @@
     <None Remove="Assets\Fondo.jpeg" />
     <None Remove="Assets\Fondo.png" />
     <None Remove="Assets\Food.png" />
+    <None Remove="Assets\ganarnivel2.png" />
     <None Remove="Assets\Head.png" />
     <None Remove="Assets\Hoyo1.png" />
     <None Remove="Assets\Hoyo2.png" />
@@ -90,6 +91,7 @@
     <Resource Include="Assets\Comida\Cereza.png" />
     <Resource Include="Assets\Comida\Corazon.png" />
     <Resource Include="Assets\Comida\Hambubu.png" />
+    <Resource Include="Assets\ganarnivel2.png" />
     <Resource Include="Assets\kir.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki1.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki10.png" />
