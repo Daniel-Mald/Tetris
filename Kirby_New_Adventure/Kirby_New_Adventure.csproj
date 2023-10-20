@@ -29,6 +29,7 @@
     <None Remove="Assets\Hoyo22.png" />
     <None Remove="Assets\juan.png" />
     <None Remove="Assets\Jugar_Boton.jpeg" />
+    <None Remove="Assets\kir.png" />
     <None Remove="Assets\Kirbis\k1.png" />
     <None Remove="Assets\Kirbis\k10.png" />
     <None Remove="Assets\Kirbis\k2.png" />
@@ -89,6 +90,7 @@
     <Resource Include="Assets\Comida\Cereza.png" />
     <Resource Include="Assets\Comida\Corazon.png" />
     <Resource Include="Assets\Comida\Hambubu.png" />
+    <Resource Include="Assets\kir.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki1.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki10.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki2.png" />

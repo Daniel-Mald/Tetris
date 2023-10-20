@@ -99,6 +99,7 @@ namespace Kirby_New_Adventure
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if(gameState == null) return;
             var tecla = e.Key;
             if (keyState.ContainsKey(tecla) && keyState[tecla] == true)
             {

@@ -235,6 +235,7 @@ RenderOptions.EdgeMode="Aliased">
         <Border x:Name="ScrenSuperganar" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
                 <ImageBrush ImageSource="Assets/kirbyganador.png">
+                <!--<ImageBrush ImageSource="Assets/kir.png">-->
 
                 </ImageBrush>
             </Border.Background>
