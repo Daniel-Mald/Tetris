@@ -249,8 +249,12 @@ namespace Kirby_New_Adventure
 
 
 
-            ScoreText.Text = $"Vidas {gameState.Vidas}- Movimientos {gameState.Moves}- Puntaje {Nivel.PuntajeNivel}";
-        }
+            VidasText.Text = gameState.Vidas.ToString();
+			MovimientosText.Text = gameState.Moves.ToString();
+
+			ScoreText.Text = Nivel.PuntajeNivel.ToString();
+
+		}
 
 
 
@@ -286,7 +290,7 @@ namespace Kirby_New_Adventure
         {
             foreach (var item in gameState.Pos_Comida)
             {
-                if(gameState.KirbyPosiion == item.Posision)
+                if(gameState.KirbyPosiion == item.Posision && item.Consumida == false)
                 {
                     item.Consumida = true;
                     Nivel.PuntajeNivel += 100;
@@ -330,6 +334,8 @@ namespace Kirby_New_Adventure
             Draw();
             Screnganar.Visibility = Visibility.Hidden;
             SelectNivel.Visibility = Visibility.Hidden;
+            Tutorial1.Visibility = Visibility.Hidden;
+            Tutorial2.Visibility = Visibility.Hidden;
             gameRunning = true;
 
         }
@@ -397,7 +403,21 @@ namespace Kirby_New_Adventure
             
             return player;
         }
-        private void El_reloj_Tick(object? sender, EventArgs e)
+
+		private void Ver_tuto_Click(object sender, RoutedEventArgs e)
+		{
+            if(Nivel.Nivel == 2)
+            {
+                Tutorial2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Tutorial1.Visibility = Visibility.Visible;
+            }
+            
+		}
+
+		private void El_reloj_Tick(object? sender, EventArgs e)
         {
             if(gameState.Dir == Direction.Up)
             {

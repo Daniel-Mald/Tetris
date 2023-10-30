@@ -29,10 +29,28 @@ WindowStartupLocation="CenterScreen"
 
                 </Grid.RowDefinitions>
                 <WrapPanel HorizontalAlignment="Center">
+                    <WrapPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontWeight" Value="ExtraBold"/>
+                            <Setter Property="Foreground" Value="#4B4341"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="FontSize" Value="22"/>
+                            <Setter Property="Margin" Value="10"/>
+                        </Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Width" Value="50"/>
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </WrapPanel.Resources>
                     <Image Source="/Assets/Comida/Corazon.png"></Image>
-                    <TextBlock x:Name="ScoreText" VerticalAlignment="Center" 
-           FontWeight="ExtraBold"  Foreground="#4B4341" Text="SCORE 0"
-         FontSize="22" Margin="10"></TextBlock>
+                    <TextBlock x:Name="VidasText"  Text="SCORE 0"
+                    ></TextBlock>
+
+                    <Image Source="/Assets/Kirbis/k1.png"/>
+                    <TextBlock x:Name="MovimientosText"></TextBlock>
+
+                    <Image Source="/Assets/Estrella.png"></Image>
+                    <TextBlock x:Name="ScoreText"></TextBlock>
                 </WrapPanel>
                
 
@@ -87,7 +105,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
-                <Button Grid.Column="3" Grid.Row="1" Click="Jugar_Click">Siguiente nivel</Button>
+                <Button Grid.Column="3" Grid.Row="1" Click="Ver_tuto_Click">Siguiente nivel</Button>
                 <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje" Grid.Column="2" Grid.Row="3"></Image>
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
@@ -163,17 +181,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                                                             <Setter Property="TextBlock.Foreground" Value="LightPink"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
-                                                    <!--<Setter Property="Margin" Value="5" />
-                                                    <Setter Property="Padding" Value="10" />
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter Property="Background" Value="red" />
-                                                        </Trigger>
-                                                        <Trigger Property="IsChecked" Value="False">
-                                                            <Setter Property="Background" Value="White" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>-->
+                                                    
                                                 </Style>
                                             </Border.Resources>
                                             <ContentPresenter HorizontalAlignment="Center"></ContentPresenter>
@@ -188,7 +196,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnfacil" GroupName="difi">Facil</RadioButton>
                     <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnnormal" GroupName="difi" IsChecked="True">Normal</RadioButton>
                     <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btndificil" GroupName="difi" >Dificil</RadioButton>
-                    <Button   FontSize="30" Height="100" Width="200" HorizontalAlignment="Center" x:Name="Jugar" Click="Jugar_Click">
+                    <Button   FontSize="30" Height="100" Width="200" HorizontalAlignment="Center" x:Name="Ver_tuto" Click="Ver_tuto_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="Assets/Jugar_Boton.jpeg"/>
                         </Button.Background>
@@ -235,7 +243,7 @@ RenderOptions.EdgeMode="Aliased">
         <Border x:Name="ScrenSuperganar" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
                 <ImageBrush ImageSource="Assets/ganarnivel2.png">
-                <!--<ImageBrush ImageSource="Assets/kir.png">-->
+                    <!--<ImageBrush ImageSource="Assets/kir.png">-->
 
                 </ImageBrush>
             </Border.Background>
@@ -269,8 +277,91 @@ RenderOptions.EdgeMode="Aliased">
                 </Grid.RowDefinitions>
                 <Button Grid.Column="1" Grid.Row="4" x:Name="Regresar1" Click="Regresar_Click">Regresar a inicio</Button>
                 <!--<Button Grid.Column="3" Grid.Row="1" Click="Jugar_Click">Siguiente nivel</Button>-->
-                <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" Foreground="CadetBlue" x:Name="PuntajeFinal">Puntajeadddd finall </TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" Foreground="CadetBlue" x:Name="PuntajeFinal">Puntajeadddd finall</TextBlock>
                 <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje2" Grid.Column="2" Grid.Row="3"></Image>
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
+            </Grid>
+        </Border>
+
+        <Border x:Name="Tutorial1" Grid.Row="1"  Visibility="Hidden">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets/tutorial_1.png">
+
+                </ImageBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="4" Grid.Row="2" Width="80" Click="Jugar_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/Play.png"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
+            </Grid>
+        </Border>
+        <Border x:Name="Tutorial2" Grid.Row="1"  Visibility="Hidden">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets/tutorial_2.png">
+
+                </ImageBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="4" Grid.Row="2" Width="80" Click="Jugar_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/Play.png"></ImageBrush>
+                    </Button.Background>
+                </Button>
+
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
         </Border>
