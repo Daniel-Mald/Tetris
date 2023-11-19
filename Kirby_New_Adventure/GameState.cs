@@ -23,6 +23,7 @@ namespace Kirby_New_Adventure
         public Position KirbyPosiion { get; set; }
         public Position JuanPosition { get; set; }
         public Position KIrbyPosInitial { get; set; }
+        public Position BotonPosition { get; set; }
       //  private Direction KirbyDirection { get; set; }  
         public bool GameOver { get; private set; }
         public int state { get; private set; }
@@ -38,6 +39,7 @@ namespace Kirby_New_Adventure
         public event Delegado Al_Ganar;
         public event Delegado Al_Perder;
         public event Delegado Al_Caer;
+        public event Delegado Al_presionar_boton;
 
         public bool MinimoMovs { get; set; } = false;
         private readonly Random random = new Random();
@@ -45,6 +47,8 @@ namespace Kirby_New_Adventure
         public SoundPlayer MorirSonido = new("file://application/Assets/Death_sound.wav");
 
         public List<Comidaa> Pos_Comida;
+        public List<PiedrasFalsas> Pos_PiedrasF;
+        public bool BotonPresionado = false;
       
 
 
@@ -56,6 +60,7 @@ namespace Kirby_New_Adventure
             Al_Ganar += GameState_Al_Ganar;
             Al_Perder += GameState_Al_Perder;
             Pos_Comida = new();
+            Pos_PiedrasF = new();
             Grid = Ma.MapaActual;
             KirbyPosiion = Ma.KirbyPos;
             KIrbyPosInitial = Ma.KirbyPos;
@@ -100,6 +105,34 @@ namespace Kirby_New_Adventure
                     Moves = 31;
                 }
             }
+            else if(nivel == 3)
+            {
+                if (dificultad == "Facil")
+                {
+                    Vidas = 6;
+                    Moves = 35;
+                }
+
+                else if (dificultad == "Dificil")
+                {
+                    Vidas = 1;
+                    Moves = 27;
+                }
+                else
+                {
+                    Vidas = 3;
+                    Moves = 31;
+                }
+
+                foreach (var item in Ma.PiedrasF)
+                {
+                    Pos_PiedrasF.Add(new PiedrasFalsas
+                    {
+                        Posision = item
+                    });
+                }
+                BotonPosition = Ma.Boton;
+            }
             foreach (var item in Ma.Comida)
             {
                 Pos_Comida.Add(new Comidaa
@@ -108,6 +141,7 @@ namespace Kirby_New_Adventure
                     Consumida = false
                 });
             }
+
             
                 
             Dir = Direction.Right;
@@ -210,10 +244,20 @@ namespace Kirby_New_Adventure
                 ControlCaida = true;
                 return;
             }
-            if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
+            if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty || hit == GridValue.RocaFalsa)
             {
                 ControlPiedra = true;
 
+                return;
+            }
+            if(_newPos == BotonPosition)
+            {
+                BotonPresionado = true;
+                foreach(var item in Pos_PiedrasF)
+                {
+                    item.Destruida = true;
+                }
+                Al_presionar_boton?.Invoke();
                 return;
             }
 
@@ -246,27 +290,7 @@ namespace Kirby_New_Adventure
 
             Moves--;
 
-            //GridValue hit = WillHit(newHeadPos);
-
-
-            //if(newHeadPos == JuanPosition)
-            //{
-            //    Ganar = true;
-            //    Al_Ganar?.Invoke();              
-            //    return;
-            //}
-            //if (hit == GridValue.Empty || hit == GridValue.Vacio )
-            //{  
-            //    Al_Caer?.Invoke();
-            //    return;
-            //}
-            //if (hit == GridValue.Roca || hit == GridValue.Outside || hit == GridValue.Empty)
-            //{
-            //    Moves--;
-            //    Perdio();
-            //    return;
-            //}
-
+            
 
 
 
@@ -276,6 +300,11 @@ namespace Kirby_New_Adventure
             public Position Posision { get; set; } = null!;
             public bool Consumida { get; set; }
             
+        }
+        public class PiedrasFalsas
+        {
+            public Position Posision { get; set; } = null!;
+            public bool Destruida { get; set; } = false;
         }
     }
 }

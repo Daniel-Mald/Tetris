@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Assets\a.png" />
     <None Remove="Assets\Body.png" />
+    <None Remove="Assets\boton1.png" />
+    <None Remove="Assets\boton2.png" />
     <None Remove="Assets\Comida\Cereza.png" />
     <None Remove="Assets\Comida\Corazon.png" />
     <None Remove="Assets\Comida\Hambubu.png" />
@@ -28,6 +30,11 @@
     <None Remove="Assets\Hoyo1.png" />
     <None Remove="Assets\Hoyo2.png" />
     <None Remove="Assets\Hoyo22.png" />
+    <None Remove="Assets\IconosPro\Casa.png" />
+    <None Remove="Assets\IconosPro\Dificil.png" />
+    <None Remove="Assets\IconosPro\Facil.png" />
+    <None Remove="Assets\IconosPro\Flecha.png" />
+    <None Remove="Assets\IconosPro\Normal.png" />
     <None Remove="Assets\juan.png" />
     <None Remove="Assets\Jugar_Boton.jpeg" />
     <None Remove="Assets\kir.png" />
@@ -79,6 +86,8 @@
     <None Remove="Assets\Roca.png" />
     <None Remove="Assets\Roca2.png" />
     <None Remove="Assets\Roca22.png" />
+    <None Remove="Assets\rocaf1.png" />
+    <None Remove="Assets\rocaf2.png" />
     <None Remove="Assets\Roca_2.png" />
     <None Remove="Assets\Tierra.png" />
     <None Remove="Assets\tutorial_1.png" />
@@ -87,6 +96,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\boton1.png" />
+    <Resource Include="Assets\boton2.png" />
     <Resource Include="Assets\Comida\Rol.png" />
   </ItemGroup>
 
@@ -95,6 +106,11 @@
     <Resource Include="Assets\Comida\Corazon.png" />
     <Resource Include="Assets\Comida\Hambubu.png" />
     <Resource Include="Assets\ganarnivel2.png" />
+    <Resource Include="Assets\IconosPro\Casa.png" />
+    <Resource Include="Assets\IconosPro\Dificil.png" />
+    <Resource Include="Assets\IconosPro\Facil.png" />
+    <Resource Include="Assets\IconosPro\Flecha.png" />
+    <Resource Include="Assets\IconosPro\Normal.png" />
     <Resource Include="Assets\kir.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki1.png" />
     <Resource Include="Assets\Kirbis_izquierda\ki10.png" />
@@ -178,6 +194,8 @@
     <Resource Include="Assets\Roca.png" />
     <Resource Include="Assets\Roca2.png" />
     <Resource Include="Assets\Roca22.png" />
+    <Resource Include="Assets\rocaf1.png" />
+    <Resource Include="Assets\rocaf2.png" />
     <Resource Include="Assets\Roca_2.png" />
     <Resource Include="Assets\Tierra.png" />
     <Resource Include="Assets\tutorial_1.png" />

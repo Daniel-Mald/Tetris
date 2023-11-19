@@ -9,7 +9,11 @@
         Food,
         Kirby,
         Tierra,
-        Estrella
+        Estrella,
+        RocaFalsa,
+        RocaFalsaDestruida,
+        Boton,
+        BotonPresionado
 
     }
 }

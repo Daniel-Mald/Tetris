@@ -37,7 +37,11 @@ namespace Kirby_New_Adventure
             {GridValue.Roca, Images.Roca },
             {GridValue.Vacio, Images.Vacio },
             {GridValue.Outside, Images.Empty },
-            {GridValue.Estrella, Images.Estrella }
+            {GridValue.Estrella, Images.Estrella },
+            {GridValue.Boton, Images.Boton },
+            {GridValue.BotonPresionado, Images.BotonPresionado },
+            {GridValue.RocaFalsa, Images.RocaFalsa },
+            {GridValue.RocaFalsaDestruida, Images.RocaFalsaDestruida }
         };
         private readonly Dictionary<Direction, int> dirToRotation = new()
         {
@@ -67,6 +71,7 @@ namespace Kirby_New_Adventure
             InitializeComponent();
             Al_Ganar += MostrarGanar;
             Al_Perder += MostrarPerder;
+            
             //playerMovements = Directory.GetFiles("k", "*.png").ToList();
             //Al_Ganar += MainWindow_Al_Ganar;
             //Al_Perder += MainWindow_Al_Perder;
@@ -187,7 +192,7 @@ namespace Kirby_New_Adventure
         {
             Nivel.AumentarPuntaje();
             PuntajeFinal.Text = $"Puntaje final: {Nivel.PuntajeTotal}";
-            if(Nivel.Nivel == 2)
+            if(Nivel.Nivel == 3)
             {
                 ScrenSuperganar.Visibility = Visibility.Visible;
             }
@@ -283,7 +288,9 @@ namespace Kirby_New_Adventure
             gridImages[win.Row, win.Col].Source = Images.Estrella;
 
             DrawFood();
-            DrawKirby(); 
+            DrawKirby();
+            if(Nivel.Nivel == 3)
+            DrawButton();
             
         }
         private void DrawFood()
@@ -307,6 +314,10 @@ namespace Kirby_New_Adventure
             Position kirb = gameState.KirbyPosiion;
             gridImages[kirb.Row, kirb.Col].Source = player;
         }
+        public void DrawButton()
+        {
+            gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.Boton];
+        }
 
         private void Jugar_Click(object sender, RoutedEventArgs e)
         {
@@ -326,6 +337,10 @@ namespace Kirby_New_Adventure
             gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
             //gameState.Al_Perder += RegresarAInicio;
             //gameState.Al_Ganar += MostrarGanar;
+            if(Nivel.Nivel == 3)
+            {
+                gameState.Al_presionar_boton += GameState_Al_presionar_boton;
+            }
             gameState.Al_Perder += MostrarPerder;
             el_reloj.Tick += El_reloj_Tick;
             el_reloj.Start();
@@ -336,8 +351,14 @@ namespace Kirby_New_Adventure
             SelectNivel.Visibility = Visibility.Hidden;
             Tutorial1.Visibility = Visibility.Hidden;
             Tutorial2.Visibility = Visibility.Hidden;
+            //aqui va el tutorial 3 
             gameRunning = true;
 
+        }
+
+        private void GameState_Al_presionar_boton()
+        {
+            throw new NotImplementedException();
         }
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)

@@ -84,7 +84,7 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <Style TargetType="Button">
                         <Setter Property="Background">
                             <Setter.Value>
-                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                                <SolidColorBrush Color="Transparent" Opacity="0.7"/>
                             </Setter.Value>
                         </Setter>
                         <Setter Property="FontSize" Value="20"/>
@@ -104,8 +104,16 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Click="Regresar_Click">Regresar a inicio</Button>
-                <Button Grid.Column="3" Grid.Row="1" Click="Ver_tuto_Click">Siguiente nivel</Button>
+                <Button Grid.Column="1" Grid.Row="1" x:Name="RegresarO" Background="Transparent" Click="Regresar_Click">
+                    <Image Source="Assets/IconosPro/Flecha.png" ></Image> </Button>
+                <Button Grid.Column="3" Grid.Row="1" Click="Ver_tuto_Click" Background="Transparent">
+                    <Image Source="Assets/IconosPro/Flecha.png" RenderTransformOrigin="0.5, 0.5" >
+                        <Image.RenderTransform >
+                            <RotateTransform  Angle="180" CenterX="0"   />
+                            
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
                 <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje" Grid.Column="2" Grid.Row="3"></Image>
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
@@ -166,7 +174,8 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                         <Style TargetType="RadioButton">
                             <Setter Property="FontSize" Value="50"/>
                             <Setter Property="Background" Value="red"/>
-                           
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <Setter Property="Template">
                                 
                                 <Setter.Value>
@@ -177,6 +186,10 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=RadioButton} ,Path=IsChecked}"
                                                                      Value="True">
+                                                            <Setter Property="Height" Value="40"/>
+                                                            <Setter Property="Background" Value="AliceBlue"/>
+                                                            <Setter Property="BorderBrush" Value="White" />
+                                                            <Setter Property="BorderThickness" Value="3"/>
                                                             <Setter Property="Background" Value="black"/>
                                                             <Setter Property="TextBlock.Foreground" Value="LightPink"/>
                                                         </DataTrigger>
@@ -193,10 +206,16 @@ SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
                         </Style>
                     </DockPanel.Resources>
                     
-                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnfacil" GroupName="difi">Facil</RadioButton>
-                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnnormal" GroupName="difi" IsChecked="True">Normal</RadioButton>
-                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btndificil" GroupName="difi" >Dificil</RadioButton>
-                    <Button   FontSize="30" Height="100" Width="200" HorizontalAlignment="Center" x:Name="Ver_tuto" Click="Ver_tuto_Click">
+                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnfacil" GroupName="difi">
+                       
+                        <Image Height="40" Source="/Assets/IconosPro/Facil.png"></Image></RadioButton>
+                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btnnormal" GroupName="difi" IsChecked="True">
+                        <Image Height="40" Source="/Assets/IconosPro/Normal.png"></Image>
+                    </RadioButton>
+                    <RadioButton HorizontalAlignment="Center" DockPanel.Dock="Top" x:Name="btndificil" GroupName="difi" >
+                        <Image Height="40" Source="/Assets/IconosPro/Dificil.png"></Image>
+                    </RadioButton>
+                    <Button   Margin="10" FontSize="30" Height="100" Width="200" HorizontalAlignment="Center" x:Name="Ver_tuto" Click="Ver_tuto_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="Assets/Jugar_Boton.jpeg"/>
                         </Button.Background>
@@ -275,7 +294,9 @@ RenderOptions.EdgeMode="Aliased">
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Grid.Column="1" Grid.Row="4" x:Name="Regresar1" Click="Regresar_Click">Regresar a inicio</Button>
+                <Button Grid.Column="1" Grid.Row="4" x:Name="Regresar1" Background="Transparent" Click="Regresar_Click">
+                    <Image Source="Assets/IconosPro/Flecha.png" ></Image>
+                </Button>
                 <!--<Button Grid.Column="3" Grid.Row="1" Click="Jugar_Click">Siguiente nivel</Button>-->
                 <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" Foreground="CadetBlue" x:Name="PuntajeFinal">Puntajeadddd finall</TextBlock>
                 <Image Source="Assets/Mensaje.png" Visibility="Hidden" x:Name="mensaje2" Grid.Column="2" Grid.Row="3"></Image>
