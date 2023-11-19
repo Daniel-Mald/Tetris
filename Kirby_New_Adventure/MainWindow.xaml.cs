@@ -41,7 +41,8 @@ namespace Kirby_New_Adventure
             {GridValue.Boton, Images.Boton },
             {GridValue.BotonPresionado, Images.BotonPresionado },
             {GridValue.RocaFalsa, Images.RocaFalsa },
-            {GridValue.RocaFalsaDestruida, Images.RocaFalsaDestruida }
+            {GridValue.RocaFalsaDestruida, Images.RocaFalsaDestruida },
+            {GridValue.RocaFalsaSemidestruida , Images.RocaFalsaSemidestruida }
         };
         private readonly Dictionary<Direction, int> dirToRotation = new()
         {
@@ -271,7 +272,7 @@ namespace Kirby_New_Adventure
                 for (int c = 0; c < cols; c++)
                 {
                     GridValue gridVal = gameState.Grid[r, c];
-                    if (gameState.Grid[r, c] != GridValue.Tierra && gameState.Grid[r,c] != GridValue.Food)
+                    if (gameState.Grid[r, c] != GridValue.Tierra && gameState.Grid[r,c] != GridValue.Food && gameState.Grid[r, c] != GridValue.RocaFalsaDestruida && gameState.Grid[r, c] != GridValue.RocaFalsa)
                     {
                         gridImages[r, c].Source = gridValToImag[gridVal];
                         gridImages[r, c].Stretch = Stretch.Fill;
@@ -290,8 +291,42 @@ namespace Kirby_New_Adventure
             DrawFood();
             DrawKirby();
             if(Nivel.Nivel == 3)
-            DrawButton();
+            {
+                DrawButton();
+                DrawRocasFalsas(false);
+            }
             
+            
+        }
+        private async void  DrawRocasFalsas(bool? prmera_vez)
+        {
+            //if (prmera_vez!= null && prmera_vez == true)
+            //{
+            //    gridImages[3, 4].Source = Images.RocaFalsa;
+            //    gridImages[3, 5].Source = Images.RocaFalsa;
+            //    gridImages[3, 6].Source = Images.RocaFalsa;
+            //    await Task.Delay(500);
+            //    gridImages[3, 4].Source = Images.RocaFalsaSemidestruida;
+            //    gridImages[3, 5].Source = Images.RocaFalsaSemidestruida;
+            //    gridImages[3, 6].Source = Images.RocaFalsaSemidestruida;
+            //    await Task.Delay(500);
+                
+            //}
+           
+            foreach (var item in gameState.Pos_PiedrasF)
+            {
+                
+                if (item.Destruida != true)
+                {
+                    gridImages[item.Posision.Row, item.Posision.Col].Source = Images.RocaFalsa;
+                }
+                else
+                {   
+                    
+                    gridImages[item.Posision.Row, item.Posision.Col].Source = Images.RocaFalsaDestruida;
+                }
+
+            }
         }
         private void DrawFood()
         {
@@ -316,7 +351,15 @@ namespace Kirby_New_Adventure
         }
         public void DrawButton()
         {
-            gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.Boton];
+            if(gameState.BotonPresionado == true)
+            {
+                gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.BotonPresionado];
+            }
+            else
+            {
+                gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.Boton];
+            }
+            
         }
 
         private void Jugar_Click(object sender, RoutedEventArgs e)
@@ -351,6 +394,7 @@ namespace Kirby_New_Adventure
             SelectNivel.Visibility = Visibility.Hidden;
             Tutorial1.Visibility = Visibility.Hidden;
             Tutorial2.Visibility = Visibility.Hidden;
+            Tutorial3.Visibility = Visibility.Hidden;
             //aqui va el tutorial 3 
             gameRunning = true;
 
@@ -358,8 +402,20 @@ namespace Kirby_New_Adventure
 
         private void GameState_Al_presionar_boton()
         {
-            throw new NotImplementedException();
+            DrawRocasFalsas(true);
+
         }
+        //private void Animar_Piedra()
+        //{
+        //    gridImages[3, 4].Source = Images.RocaFalsa;
+        //    gridImages[3, 5].Source = Images.RocaFalsa;
+        //    gridImages[3, 6].Source = Images.RocaFalsa;
+        //    Task.Delay(500);
+        //    gridImages[3, 4].Source = Images.RocaFalsaSemidestruida;
+        //    gridImages[3, 5].Source = Images.RocaFalsaSemidestruida;
+        //    gridImages[3, 6].Source = Images.RocaFalsaSemidestruida;
+        //    Task.Delay(500);
+        //}
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
@@ -430,6 +486,10 @@ namespace Kirby_New_Adventure
             if(Nivel.Nivel == 2)
             {
                 Tutorial2.Visibility = Visibility.Visible;
+            }
+            else if (Nivel.Nivel == 3)
+            {
+                Tutorial3.Visibility = Visibility.Visible;
             }
             else
             {

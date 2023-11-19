@@ -256,6 +256,7 @@ namespace Kirby_New_Adventure
                 foreach(var item in Pos_PiedrasF)
                 {
                     item.Destruida = true;
+                    Grid[item.Posision.Row, item.Posision.Col] = GridValue.RocaFalsaDestruida;
                 }
                 Al_presionar_boton?.Invoke();
                 return;

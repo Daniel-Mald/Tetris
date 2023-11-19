@@ -386,6 +386,47 @@ RenderOptions.EdgeMode="Aliased">
                 <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
             </Grid>
         </Border>
+        <Border x:Name="Tutorial3" Grid.Row="1"  Visibility="Hidden">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets/tuto3.png">
+
+                </ImageBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="AliceBlue" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="4" Grid.Row="2" Width="80" Click="Jugar_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/Play.png"></ImageBrush>
+                    </Button.Background>
+                </Button>
+
+                <!--<Label DockPanel.Dock="Top" FontSize="40" Content="Ganaste"></Label>-->
+            </Grid>
+        </Border>
 
     </Grid>
     

@@ -13,7 +13,8 @@
         RocaFalsa,
         RocaFalsaDestruida,
         Boton,
-        BotonPresionado
+        BotonPresionado,
+        RocaFalsaSemidestruida
 
     }
 }

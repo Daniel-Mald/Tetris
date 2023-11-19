@@ -21,6 +21,7 @@ namespace Kirby_New_Adventure
         public readonly static ImageSource RocaFalsaDestruida = LoadImages("rocaf2.png");
         public readonly static ImageSource Boton = LoadImages("boton1.png");
         public readonly static ImageSource BotonPresionado = LoadImages("boton2.png");
+        public readonly static ImageSource RocaFalsaSemidestruida = LoadImages("rocaf3.png");
 
         private static ImageSource LoadImages(string filename)
         {
