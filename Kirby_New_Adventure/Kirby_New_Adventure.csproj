@@ -10,8 +10,10 @@
   <ItemGroup>
     <None Remove="Assets\a.png" />
     <None Remove="Assets\Body.png" />
+    <None Remove="Assets\Boton.png" />
     <None Remove="Assets\boton1.png" />
     <None Remove="Assets\boton2.png" />
+    <None Remove="Assets\BotonPresionado.png" />
     <None Remove="Assets\Comida\Cereza.png" />
     <None Remove="Assets\Comida\Corazon.png" />
     <None Remove="Assets\Comida\Hambubu.png" />
@@ -81,6 +83,7 @@
     <None Remove="Assets\Pantalla_principal.jpg" />
     <None Remove="Assets\Pasto1.png" />
     <None Remove="Assets\Pasto2.png" />
+    <None Remove="Assets\PiedraRota.png" />
     <None Remove="Assets\Play.png" />
     <None Remove="Assets\pollo.png" />
     <None Remove="Assets\Roca.png" />
@@ -98,8 +101,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Boton.png" />
     <Resource Include="Assets\boton1.png" />
     <Resource Include="Assets\boton2.png" />
+    <Resource Include="Assets\BotonPresionado.png" />
     <Resource Include="Assets\Comida\Rol.png" />
   </ItemGroup>
 
@@ -191,6 +196,7 @@
     <Resource Include="Assets\Pantalla_principal.jpg" />
     <Resource Include="Assets\Pasto1.png" />
     <Resource Include="Assets\Pasto2.png" />
+    <Resource Include="Assets\PiedraRota.png" />
     <Resource Include="Assets\Play.png" />
     <Resource Include="Assets\pollo.png" />
     <Resource Include="Assets\Roca.png" />
