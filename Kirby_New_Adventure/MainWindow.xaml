@@ -388,7 +388,7 @@ RenderOptions.EdgeMode="Aliased">
         </Border>
         <Border x:Name="Tutorial3" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/tuto3.png">
+                <ImageBrush ImageSource="Assets/tutorial3.png">
 
                 </ImageBrush>
             </Border.Background>

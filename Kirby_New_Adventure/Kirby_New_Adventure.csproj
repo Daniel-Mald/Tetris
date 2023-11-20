@@ -95,6 +95,7 @@
     <None Remove="Assets\Roca_2.png" />
     <None Remove="Assets\Tierra.png" />
     <None Remove="Assets\tuto3.png" />
+    <None Remove="Assets\tutorial3.png" />
     <None Remove="Assets\tutorial_1.png" />
     <None Remove="Assets\tutorial_2.png" />
     <None Remove="Assets\Vacio.png" />
@@ -208,6 +209,7 @@
     <Resource Include="Assets\Roca_2.png" />
     <Resource Include="Assets\Tierra.png" />
     <Resource Include="Assets\tuto3.png" />
+    <Resource Include="Assets\tutorial3.png" />
     <Resource Include="Assets\tutorial_1.png" />
     <Resource Include="Assets\tutorial_2.png" />
     <Resource Include="Assets\Vacio.png" />
