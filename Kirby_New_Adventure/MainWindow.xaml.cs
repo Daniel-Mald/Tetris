@@ -52,7 +52,7 @@ namespace Kirby_New_Adventure
             {Direction.Left , 270 }
         };
         ControlNiveles Nivel = new();
-        private readonly int rows = 5, cols = 8;
+        private  int rows = 5, cols = 8;
         private Image[,] gridImages;
         public GameState gameState;
         public string Re { get; set; }
@@ -193,7 +193,7 @@ namespace Kirby_New_Adventure
         {
             Nivel.AumentarPuntaje();
             PuntajeFinal.Text = $"Puntaje final: {Nivel.PuntajeTotal}";
-            if(Nivel.Nivel == 3)
+            if(Nivel.Nivel == 4)
             {
                 ScrenSuperganar.Visibility = Visibility.Visible;
             }
@@ -290,7 +290,7 @@ namespace Kirby_New_Adventure
 
             DrawFood();
             DrawKirby();
-            if(Nivel.Nivel == 3)
+            if(Nivel.Nivel >= 3)
             {
                 DrawButton();
                 DrawRocasFalsas(false);
@@ -351,13 +351,31 @@ namespace Kirby_New_Adventure
         }
         public void DrawButton()
         {
-            if(gameState.BotonPresionado == true)
+            if(Nivel.Nivel == 4)
             {
-                gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.BotonPresionado];
+                foreach (var item in gameState.Pos_Botones)
+                {
+                    if(item.Presionado == true)
+                    {
+                        gridImages[item.Posision.Row, item.Posision.Col].Source = gridValToImag[GridValue.BotonPresionado];
+                    }
+                    else
+                    {
+                        gridImages[item.Posision.Row, item.Posision.Col].Source = gridValToImag[GridValue.Boton];
+                    }
+                }
             }
             else
             {
-                gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.Boton];
+                if(gameState.BotonPresionado == true)
+                {
+                    gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.BotonPresionado];
+                }
+                else
+                {
+                    gridImages[gameState.BotonPosition.Row, gameState.BotonPosition.Col].Source = gridValToImag[GridValue.Boton];
+                }
+
             }
             
         }
@@ -377,10 +395,21 @@ namespace Kirby_New_Adventure
                 dificultad = "Normal";
             }
 
-            gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
-            //gameState.Al_Perder += RegresarAInicio;
-            //gameState.Al_Ganar += MostrarGanar;
-            if(Nivel.Nivel == 3)
+
+
+            if(Nivel.Nivel == 4)
+            {
+                rows = 8;
+                cols = 9;
+                gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
+            }
+            else
+            {
+
+                gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
+            }
+            
+            if(Nivel.Nivel >= 3)
             {
                 gameState.Al_presionar_boton += GameState_Al_presionar_boton;
             }
@@ -402,6 +431,7 @@ namespace Kirby_New_Adventure
 
         private void GameState_Al_presionar_boton()
         {
+            
             DrawRocasFalsas(true);
 
         }
@@ -431,6 +461,8 @@ namespace Kirby_New_Adventure
             SelectNivel.Visibility = Visibility.Visible;
             Overlay.Visibility = Visibility.Visible;
             Nivel = new ControlNiveles();
+            rows = 5;
+            cols = 8;
         }
 
         private void Reintentar_Click(object sender, RoutedEventArgs e)

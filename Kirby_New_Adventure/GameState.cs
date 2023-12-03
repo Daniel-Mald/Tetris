@@ -48,7 +48,9 @@ namespace Kirby_New_Adventure
 
         public List<Comidaa> Pos_Comida;
         public List<PiedrasFalsas> Pos_PiedrasF;
+        public List<Botones> Pos_Botones;
         public bool BotonPresionado = false;
+        int Nivel;
       
 
 
@@ -58,9 +60,12 @@ namespace Kirby_New_Adventure
             Rows = rows; Cols = cols;
             Al_Caer += GameState_Al_Caer;
             Al_Ganar += GameState_Al_Ganar;
+            Nivel = nivel;
             Al_Perder += GameState_Al_Perder;
             Pos_Comida = new();
             Pos_PiedrasF = new();
+            if(nivel == 4)
+                Pos_Botones = new();
             Grid = Ma.MapaActual;
             KirbyPosiion = Ma.KirbyPos;
             KIrbyPosInitial = Ma.KirbyPos;
@@ -133,6 +138,38 @@ namespace Kirby_New_Adventure
                 }
                 BotonPosition = Ma.Boton;
             }
+            else if(nivel == 4)
+            {
+                if (dificultad == "Facil")
+                {
+                    Vidas = 6;
+                    Moves = 85;
+                }
+
+                else if (dificultad == "Dificil")
+                {
+                    Vidas = 1;
+                    Moves = 67;
+                }
+                else
+                {
+                    Vidas = 3;
+                    Moves = 51;
+                }
+
+                foreach (var item in Ma.PiedrasF)
+                {
+                    Pos_PiedrasF.Add(new PiedrasFalsas
+                    {
+                        Posision = item
+                    });
+                }
+                foreach (var item in Ma.Botones)
+                {
+                    if(Pos_Botones != null)
+                    Pos_Botones.Add(new Botones { Posision = item });
+                }
+            }
             foreach (var item in Ma.Comida)
             {
                 Pos_Comida.Add(new Comidaa
@@ -151,12 +188,13 @@ namespace Kirby_New_Adventure
         }
         public bool  ValidarCadena()
         {
-            if (CadenaDePasos == "sdddsdsddds")
-            {
+            //if (CadenaDePasos == "sdddsdsddds")
+            //{
                 
-                return true;
-            }
-            return false;
+            //    return true;
+            //}
+            //return false;
+            return CadenaDePasos == "sdddsdsddds";
         }
 
         private void GameState_Al_Perder()
@@ -250,6 +288,33 @@ namespace Kirby_New_Adventure
 
                 return;
             }
+            if(Nivel == 4)
+            {
+                byte presionados = 0;
+                foreach (var item in Pos_Botones)
+                {
+                    if(_newPos == item.Posision)
+                    {
+                        item.Presionado = true;
+                    }
+                    if(item.Presionado == true)
+                    {
+                        presionados++;
+                    }
+                    
+                
+                }
+                if (presionados == Pos_Botones.Count())
+                {
+                    foreach (var tem in Pos_PiedrasF)
+                    {
+                        tem.Destruida = true;
+                        Grid[tem.Posision.Row, tem.Posision.Col] = GridValue.RocaFalsaDestruida;
+                    }
+                    Al_presionar_boton?.Invoke();
+                }
+
+            }
             if(_newPos == BotonPosition)
             {
                 BotonPresionado = true;
@@ -306,6 +371,11 @@ namespace Kirby_New_Adventure
         {
             public Position Posision { get; set; } = null!;
             public bool Destruida { get; set; } = false;
+        }
+        public class Botones
+        {
+            public Position Posision { get; set; } = null!;
+            public bool Presionado { get; set; } = false;
         }
     }
 }
