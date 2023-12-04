@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Assets\a.png" />
+    <None Remove="Assets\bocchi.png" />
     <None Remove="Assets\Body.png" />
     <None Remove="Assets\Boton.png" />
     <None Remove="Assets\boton1.png" />
@@ -21,6 +22,8 @@
     <None Remove="Assets\DeadBody.png" />
     <None Remove="Assets\DeadHead.png" />
     <None Remove="Assets\Death_sound.mp3" />
+    <None Remove="Assets\Demonio.png" />
+    <None Remove="Assets\DemonioMorido.png" />
     <None Remove="Assets\Empty.png" />
     <None Remove="Assets\Estrella.png" />
     <None Remove="Assets\Fall_sound.mp3" />
@@ -80,6 +83,7 @@
     <None Remove="Assets\Kirby_level.png" />
     <None Remove="Assets\Kirby_perder.png" />
     <None Remove="Assets\Mensaje.png" />
+    <None Remove="Assets\PantallaGanarNivel4.png" />
     <None Remove="Assets\Pantalla_principal.jpg" />
     <None Remove="Assets\Pasto1.png" />
     <None Remove="Assets\Pasto2.png" />
@@ -102,6 +106,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\bocchi.png" />
     <Resource Include="Assets\Boton.png" />
     <Resource Include="Assets\boton1.png" />
     <Resource Include="Assets\boton2.png" />
@@ -113,6 +118,8 @@
     <Resource Include="Assets\Comida\Cereza.png" />
     <Resource Include="Assets\Comida\Corazon.png" />
     <Resource Include="Assets\Comida\Hambubu.png" />
+    <Resource Include="Assets\Demonio.png" />
+    <Resource Include="Assets\DemonioMorido.png" />
     <Resource Include="Assets\ganarnivel2.png" />
     <Resource Include="Assets\IconosPro\Casa.png" />
     <Resource Include="Assets\IconosPro\Dificil.png" />
@@ -194,6 +201,7 @@
     <Resource Include="Assets\Kirby_level.png" />
     <Resource Include="Assets\Kirby_perder.png" />
     <Resource Include="Assets\Mensaje.png" />
+    <Resource Include="Assets\PantallaGanarNivel4.png" />
     <Resource Include="Assets\Pantalla_principal.jpg" />
     <Resource Include="Assets\Pasto1.png" />
     <Resource Include="Assets\Pasto2.png" />

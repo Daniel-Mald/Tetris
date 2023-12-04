@@ -358,6 +358,7 @@ namespace Kirby_New_Adventure
                     if(item.Presionado == true)
                     {
                         gridImages[item.Posision.Row, item.Posision.Col].Source = gridValToImag[GridValue.BotonPresionado];
+                        
                     }
                     else
                     {
@@ -378,6 +379,27 @@ namespace Kirby_New_Adventure
 
             }
             
+        }
+
+        public async void DemonioGolpeado()
+        {
+
+            
+
+            Image imagen = new();
+            imagen.Source=  new BitmapImage(new Uri($"Assets/DemonioMorido.png", UriKind.Relative));
+            imagen.Stretch = System.Windows.Media.Stretch.Fill;
+            EnemigoGrid.Children.Add(imagen);
+            await Task.Delay(1000);
+            if ((gameState.Pos_Botones.Where(x => x.Presionado).Count()) == 4)
+            {
+                Image derrotado = new();
+                derrotado.Source = new BitmapImage(new Uri($"Assets/bocchi.png", UriKind.Relative));
+                derrotado.Stretch = System.Windows.Media.Stretch.Fill;
+                EnemigoGrid.Children.Add(derrotado);
+            }
+            //imagen.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
+            EnemigoGrid.Children.Remove(imagen);
         }
 
         private void Jugar_Click(object sender, RoutedEventArgs e)
@@ -402,11 +424,21 @@ namespace Kirby_New_Adventure
                 rows = 8;
                 cols = 9;
                 gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
+                EnemigoGrid.Width = 200;
+                gameState.Al_Presionar_otro_boton += DemonioGolpeado;
+                Image demonio = new();
+                demonio.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
+                demonio.Stretch = System.Windows.Media.Stretch.Fill;
+                EnemigoGrid.Children.Add(demonio);
             }
             else
             {
 
                 gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
+                if(EnemigoGrid.ActualWidth > 0)
+                {
+                    EnemigoGrid.Width = 0;
+                }
             }
             
             if(Nivel.Nivel >= 3)
@@ -468,7 +500,15 @@ namespace Kirby_New_Adventure
         private void Reintentar_Click(object sender, RoutedEventArgs e)
         {
             gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
-            
+            if(Nivel.Nivel == 4)
+            {
+                Image demo = new();
+                demo.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
+                demo.Stretch = System.Windows.Media.Stretch.Fill;
+                EnemigoGrid.Children.Add(demo);
+                gameState.Al_Presionar_otro_boton += DemonioGolpeado;
+
+            }
             gameState.Al_Perder += MostrarPerder;
 
             gridImages = SetUpGrid();

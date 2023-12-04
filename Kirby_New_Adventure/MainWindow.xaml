@@ -56,15 +56,21 @@ WindowStartupLocation="CenterScreen"
 
                 <Border x:Name="GridBorder" Grid.Row="1" BorderBrush="{StaticResource GridLineColor}" BorderThickness="1.5"
 HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.EdgeMode="Aliased" Margin="20 0 20 20">
-                    <Grid >
-                        <Grid.Background>
+                    <DockPanel >
+                        
+                        <DockPanel.Background>
                             <ImageBrush ImageSource="/Assets/Pasto2.png"/>
-                        </Grid.Background>
+                        </DockPanel.Background>
                         <UniformGrid x:Name="GameGrid"  Width="400" Height="400" 
 SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
 
-                        </UniformGrid>
-                    </Grid>
+                        </UniformGrid >
+                        <Grid x:Name="EnemigoGrid" Grid.Column="1"  Width="00" >
+                            <Grid.Background >
+                                <ImageBrush Stretch="Fill" ImageSource="/Assets/Demonio.png" />
+                            </Grid.Background>
+                        </Grid>
+                    </DockPanel>
 
 
                     
@@ -261,7 +267,7 @@ RenderOptions.EdgeMode="Aliased">
         </Border>
         <Border x:Name="ScrenSuperganar" Grid.Row="1"  Visibility="Hidden">
             <Border.Background>
-                <ImageBrush ImageSource="Assets/ganarnivel2.png">
+                <ImageBrush ImageSource="Assets/PantallaGanarNivel4.png">
                     <!--<ImageBrush ImageSource="Assets/kir.png">-->
 
                 </ImageBrush>

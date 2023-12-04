@@ -40,6 +40,7 @@ namespace Kirby_New_Adventure
         public event Delegado Al_Perder;
         public event Delegado Al_Caer;
         public event Delegado Al_presionar_boton;
+        public event Delegado Al_Presionar_otro_boton;
 
         public bool MinimoMovs { get; set; } = false;
         private readonly Random random = new Random();
@@ -296,6 +297,8 @@ namespace Kirby_New_Adventure
                     if(_newPos == item.Posision)
                     {
                         item.Presionado = true;
+                        Al_Presionar_otro_boton?.Invoke();
+
                     }
                     if(item.Presionado == true)
                     {
