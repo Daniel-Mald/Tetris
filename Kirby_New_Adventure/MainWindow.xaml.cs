@@ -14,12 +14,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Kirby_New_Adventure;
+using Microsoft.Xna.Framework.Content;
 
 namespace Kirby_New_Adventure
 {
@@ -349,6 +350,7 @@ namespace Kirby_New_Adventure
             Position kirb = gameState.KirbyPosiion;
             gridImages[kirb.Row, kirb.Col].Source = player;
         }
+       
         public void DrawButton()
         {
             if(Nivel.Nivel == 4)
@@ -384,22 +386,36 @@ namespace Kirby_New_Adventure
         public async void DemonioGolpeado()
         {
 
-            
-
-            Image imagen = new();
-            imagen.Source=  new BitmapImage(new Uri($"Assets/DemonioMorido.png", UriKind.Relative));
-            imagen.Stretch = System.Windows.Media.Stretch.Fill;
-            EnemigoGrid.Children.Add(imagen);
-            await Task.Delay(1000);
+            _reloj_dididi.Stop();
+            EnemigoGrid.Children.Clear();
+            Image mango = new();
+            for (int i = 1; i < 5; i++)
+            {
+                
+                mango.Source = new BitmapImage(new Uri($"Assets/Sprites lvl4/JefeDaño{i}.png", UriKind.Relative));
+                mango.Stretch = System.Windows.Media.Stretch.Fill;
+                EnemigoGrid.Children.Add(mango);
+                await Task.Delay(500);
+                EnemigoGrid.Children.Remove(mango);
+            }
+            //Image imagen = new();
+            //imagen.Source=  new BitmapImage(new Uri($"Assets/Sprites lvl4/JefeDaño2.png", UriKind.Relative));
+            //imagen.Stretch = System.Windows.Media.Stretch.Fill;
+            //EnemigoGrid.Children.Add(imagen);
+            //await Task.Delay(1000);
+            bool s = true;
             if ((gameState.Pos_Botones.Where(x => x.Presionado).Count()) == 4)
             {
                 Image derrotado = new();
-                derrotado.Source = new BitmapImage(new Uri($"Assets/bocchi.png", UriKind.Relative));
+                derrotado.Source = new BitmapImage(new Uri($"Assets/Sprites lvl4/JefeDaño3.png", UriKind.Relative));
                 derrotado.Stretch = System.Windows.Media.Stretch.Fill;
                 EnemigoGrid.Children.Add(derrotado);
+                s = false;
             }
             //imagen.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
-            EnemigoGrid.Children.Remove(imagen);
+            //EnemigoGrid.Children.Remove(imagen);
+            if(s == true)
+            _reloj_dididi.Start();
         }
 
         private void Jugar_Click(object sender, RoutedEventArgs e)
@@ -425,11 +441,15 @@ namespace Kirby_New_Adventure
                 cols = 9;
                 gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
                 EnemigoGrid.Width = 200;
+                lala.Width = 200;
+                lala.Margin = new Thickness() { Bottom =70, Left = 70, Right = 70, Top = 70 };
                 gameState.Al_Presionar_otro_boton += DemonioGolpeado;
-                Image demonio = new();
-                demonio.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
-                demonio.Stretch = System.Windows.Media.Stretch.Fill;
-                EnemigoGrid.Children.Add(demonio);
+                //Image demonio = new();
+                //demonio.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
+                //demonio.Stretch = System.Windows.Media.Stretch.Fill;
+                //EnemigoGrid.Children.Add(demonio);
+                _reloj_dididi.Tick += _reloj_Dididi_Tick;
+                _reloj_dididi.Start();
             }
             else
             {
@@ -438,6 +458,8 @@ namespace Kirby_New_Adventure
                 if(EnemigoGrid.ActualWidth > 0)
                 {
                     EnemigoGrid.Width = 0;
+                    lala.Width = 0;
+                    lala.Margin = new Thickness() { Bottom = 0 , Left = 0 , Right = 0 , Top = 0};
                 }
             }
             
@@ -447,6 +469,7 @@ namespace Kirby_New_Adventure
             }
             gameState.Al_Perder += MostrarPerder;
             el_reloj.Tick += El_reloj_Tick;
+            
             el_reloj.Start();
             gridImages = SetUpGrid();
 
@@ -502,10 +525,12 @@ namespace Kirby_New_Adventure
             gameState = new GameState(rows, cols, dificultad, Nivel.Nivel);
             if(Nivel.Nivel == 4)
             {
-                Image demo = new();
-                demo.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
-                demo.Stretch = System.Windows.Media.Stretch.Fill;
-                EnemigoGrid.Children.Add(demo);
+                //Image demo = new();
+                //demo.Source = new BitmapImage(new Uri($"Assets/Demonio.png", UriKind.Relative));
+                //demo.Stretch = System.Windows.Media.Stretch.Fill;
+                //EnemigoGrid.Children.Add(demo);
+                _reloj_dididi.Stop();
+                _reloj_dididi.Start();
                 gameState.Al_Presionar_otro_boton += DemonioGolpeado;
 
             }
@@ -522,10 +547,12 @@ namespace Kirby_New_Adventure
 
        
         //Animacion
-        public BitmapImage player { get; set; }      
+        public BitmapImage player { get; set; }   
+        //public BitmapImage Dididi { get; set; }
         int steps = 0;
-          
-        DispatcherTimer el_reloj = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };     
+        int steps_dididi = 0;
+        DispatcherTimer el_reloj = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(50) };
+        DispatcherTimer _reloj_dididi = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(300) };
         private BitmapImage animatePlayer(int start, int end, Direction dir)
         {
             steps++;
@@ -552,8 +579,9 @@ namespace Kirby_New_Adventure
             
             return player;
         }
+       
 
-		private void Ver_tuto_Click(object sender, RoutedEventArgs e)
+        private void Ver_tuto_Click(object sender, RoutedEventArgs e)
 		{
             if(Nivel.Nivel == 2)
             {
@@ -569,8 +597,25 @@ namespace Kirby_New_Adventure
             }
             
 		}
-
-		private void El_reloj_Tick(object? sender, EventArgs e)
+        private void _reloj_Dididi_Tick(object sender, EventArgs e)
+        {
+            //_animateDididi(0, 4);
+            DrawDididi();
+        }
+        byte a = 1;
+        public void DrawDididi()
+        {
+            if(a > 4) { a = 1; }
+                EnemigoGrid.Children.Clear();
+                Image imagen = new();
+                imagen.Source = new BitmapImage(new Uri($"Assets/Sprites lvl4/JefeMov{a}.png", UriKind.Relative));
+                imagen.Stretch = System.Windows.Media.Stretch.Fill;
+                EnemigoGrid.Children.Add(imagen);
+            a++;
+            
+            
+        }
+        private void El_reloj_Tick(object? sender, EventArgs e)
         {
             if(gameState.Dir == Direction.Up)
             {

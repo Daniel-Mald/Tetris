@@ -31,6 +31,7 @@ namespace Kirby_New_Adventure
         public static List<BitmapImage> kirbos_e = new List<BitmapImage>();
         public static List<BitmapImage> kirbos_f = new List<BitmapImage>();
         public static List<BitmapImage> kirbos_i = new List<BitmapImage>();
+        //public static List<BitmapImage> Dididis = new();
         public  static void RellenarKirbos()
         {
             for (int i = 1; i < 11; i++)
@@ -43,6 +44,10 @@ namespace Kirby_New_Adventure
             {
                 kirbos_e.Add((BitmapImage)LoadImages($"Kirbis_espalda/ke{i}.png"));
             }
+            //for (int i = 1; i < 5; i++)
+            //{
+            //    Dididis.Add((BitmapImage)LoadImages($"Sprites lvl4/JefeMov{i}.png"));
+            //}
            
         }
     }

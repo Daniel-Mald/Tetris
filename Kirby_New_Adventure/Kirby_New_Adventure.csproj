@@ -97,12 +97,25 @@
     <None Remove="Assets\rocaf2.png" />
     <None Remove="Assets\rocaf3.png" />
     <None Remove="Assets\Roca_2.png" />
+    <None Remove="Assets\Sprites lvl4\EscenarioFlotante.png" />
+    <None Remove="Assets\Sprites lvl4\JefeDaño1.png" />
+    <None Remove="Assets\Sprites lvl4\JefeDaño2.png" />
+    <None Remove="Assets\Sprites lvl4\JefeDaño3.png" />
+    <None Remove="Assets\Sprites lvl4\JefeDaño4.png" />
+    <None Remove="Assets\Sprites lvl4\JefeMov1.png" />
+    <None Remove="Assets\Sprites lvl4\JefeMov2.png" />
+    <None Remove="Assets\Sprites lvl4\JefeMov3.png" />
+    <None Remove="Assets\Sprites lvl4\JefeMov4.png" />
     <None Remove="Assets\Tierra.png" />
     <None Remove="Assets\tuto3.png" />
     <None Remove="Assets\tutorial3.png" />
     <None Remove="Assets\tutorial_1.png" />
     <None Remove="Assets\tutorial_2.png" />
     <None Remove="Assets\Vacio.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Sprites lvl4\JefeDaño3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -215,6 +228,14 @@
     <Resource Include="Assets\rocaf2.png" />
     <Resource Include="Assets\rocaf3.png" />
     <Resource Include="Assets\Roca_2.png" />
+    <Resource Include="Assets\Sprites lvl4\EscenarioFlotante.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeDaño1.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeDaño2.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeDaño4.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeMov1.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeMov2.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeMov3.png" />
+    <Resource Include="Assets\Sprites lvl4\JefeMov4.png" />
     <Resource Include="Assets\Tierra.png" />
     <Resource Include="Assets\tuto3.png" />
     <Resource Include="Assets\tutorial3.png" />

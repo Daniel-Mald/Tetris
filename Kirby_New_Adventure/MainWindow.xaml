@@ -65,11 +65,17 @@ HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.EdgeMode="
 SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality">
 
                         </UniformGrid >
-                        <Grid x:Name="EnemigoGrid" Grid.Column="1"  Width="00" >
-                            <Grid.Background >
-                                <ImageBrush Stretch="Fill" ImageSource="/Assets/Demonio.png" />
-                            </Grid.Background>
+                        <Grid Grid.Column="1"  Width="00" x:Name="lala" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".8*"/>
+                                <RowDefinition Height=".2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="EnemigoGrid" Grid.Row="0" >
+                                
+                            </Grid>
+                            <Image Grid.Row="1" Source="/Assets/Sprites lvl4/EscenarioFlotante.png" VerticalAlignment="Top"></Image>
                         </Grid>
+                        
                     </DockPanel>
 
 
